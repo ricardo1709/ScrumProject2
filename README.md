@@ -1,5 +1,5 @@
 <p align="center">
-<a href="https://travis-ci.org/ricardo1709/ScrumProject"><img src="https://travis-ci.org/ricardo1709/ScrumProject.svg?branch=master" alt="Build Status"></a>
+<a href="https://travis-ci.org/ricardo1709/ScrumProject2"><img src="https://travis-ci.org/ricardo1709/ScrumProject2.svg?branch=master" alt="Build Status"></a>
 </p>
 
 # Issues
