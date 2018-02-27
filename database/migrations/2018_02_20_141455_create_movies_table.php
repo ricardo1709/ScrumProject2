@@ -17,6 +17,7 @@ class CreateMoviesTable extends Migration
             $table->increments('movieId');
             $table->string('movieTitle');
             $table->text('movieDescription');
+            $table->decimal('moviePrice', 8, 2);
             $table->timestamps();
         });
     }

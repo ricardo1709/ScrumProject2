@@ -33,7 +33,7 @@ class CreateTransactions extends Migration
     {
         Schema::table('transactions', function($table) {
             $table->dropForeign('transactions_movieId_foreign');
-            $table->dropForeign('transactions_seatId_foreign');
+            $table->dropForeign('transactions_userId_foreign');
         });
         Schema::dropIfExists('transactions');
     }
