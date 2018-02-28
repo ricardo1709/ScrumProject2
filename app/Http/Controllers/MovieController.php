@@ -54,7 +54,9 @@ class MovieController extends Controller
      */
     public function edit($id)
     {
-        //
+        $movie = Movie::where('movieId', $id)->get();
+
+        return view('overview')->with('movies', $movie);
     }
     /**
      * Update the specified resource in storage.
