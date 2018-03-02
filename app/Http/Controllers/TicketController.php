@@ -56,10 +56,18 @@ class TicketController extends Controller
 
 		// Loads HTML into generator, can also use file reference to convert.
 		// Can also use view('view reference');
-		$pdf->loadHTML($this->createBarcode("0123456789"));
+		$pdf->loadHTML($this->loadPDFtemplate("0123456789"));
 
 		// Returns PDF
 		return $pdf->stream();
+	}
+
+	// Loads view and loads barcode
+	public function loadPDFtemplate($barcode)
+	{
+		$imgBarcode = $this->createBarcode($barcode);
+
+		return view('TicketPDF.pdftemplate', compact('imgBarcode', 'barcode'));
 	}
 
 	// Use 'composer require milon/barcode' to obtain barcode generator
@@ -70,6 +78,8 @@ class TicketController extends Controller
 		$imgBarcode = \DNS1D::getBarcodePNG($barcode, "C39");
 
 		// Returns the template view, with imgBarcode and original barcode value
-    	return view('TicketPDF.pdftemplate', compact('imgBarcode', 'barcode'));
+    	return $imgBarcode;
 	}
+
+
 }
