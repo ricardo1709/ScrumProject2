@@ -15,10 +15,10 @@ class CreateSeats extends Migration
     {
         Schema::create('Seats', function(Blueprint $table){
             $table->increments('seatId');
-            $table->integer('zaalId')->unsigned();
+            $table->integer('roomId')->unsigned();
             $table->boolean('isGereserveerd');
 
-            $table->foreign('zaalId')->references('zaalId')->on('Zaals');
+            $table->foreign('roomId')->references('roomId')->on('Rooms');
         });
     }
 
@@ -30,7 +30,7 @@ class CreateSeats extends Migration
     public function down()
     {
         Schema::table('Seats', function($table) {
-            $table->dropForeign('Seats_zaalId_foreign');
+            $table->dropForeign('Seats_roomId_foreign');
         });
         Schema::dropIfExists('Seats');
     }
