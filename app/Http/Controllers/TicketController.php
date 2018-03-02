@@ -62,6 +62,7 @@ class TicketController extends Controller
 		return $pdf->stream();
 	}
 
+	// Use 'composer require milon/barcode' to obtain barcode generator
 	// Gets Barcode value parsed
 	public function createBarcode($barcode)
 	{
