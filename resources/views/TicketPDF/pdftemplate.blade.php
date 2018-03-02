@@ -8,7 +8,7 @@
     <title>Document</title>
     <style>
         h1 {
-            background: #000;
+            background: #999999;
         }
     </style>
 </head>
