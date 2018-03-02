@@ -14,5 +14,7 @@
 </head>
 <body>
     <h1>Hallo</h1>
+    <img src="data:image/png;base64,' . {{ $imgBarcode }} . '" alt="">
+    <p>{{ $barcode }}</p>
 </body>
 </html>
