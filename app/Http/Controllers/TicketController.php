@@ -54,7 +54,8 @@ class TicketController extends Controller
 		$pdf = App::make('dompdf.wrapper');
 
 		// Loads HTML into generator, can also use file reference to convert.
-		$pdf->loadHTML('<h1>Dit is een test html deel</h1>');
+		// Can also use view('view reference');
+		$pdf->loadHTML(view('TicketPDF.pdftemplate'));
 
 		// Returns PDF
 		return $pdf->stream();
