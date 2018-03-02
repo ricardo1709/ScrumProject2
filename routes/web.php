@@ -34,3 +34,6 @@ Route::group(['middleware'=>['auth']], function (){
         Route::post('/movies/{movie}/edit', 'MovieController@update');
     });
 });
+
+// Temporary route to check if TicketController@createPDF functions properly
+Route::get('/createPDF', 'TicketController@createPDF');
