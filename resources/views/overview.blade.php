@@ -1,5 +1,6 @@
 @include('layouts.app')
 
+<div class="container">
     {{--This part can be used for the LaraFilm Project--}}
     @foreach($movies as  $movie)
         <div class="Movie">
@@ -11,4 +12,4 @@
         </div>
     @endforeach
     {{--Ends here!--}}
-
+</div>
