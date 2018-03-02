@@ -19,6 +19,7 @@ class CreateTickets extends Migration
             $table->integer('movieId')->unsigned();
             $table->integer('transactionId')->unsigned();
             $table->integer('seatId')->unsigned();
+            $table->timestamps();
 
             $table->foreign('movieId')->references('movieId')->on('movies');
             $table->foreign('transactionId')->references('transactionId')->on('transactions');
