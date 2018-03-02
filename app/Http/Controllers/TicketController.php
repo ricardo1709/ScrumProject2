@@ -55,7 +55,7 @@ class TicketController extends Controller
 
 		// Loads HTML into generator, can also use file reference to convert.
 		// Can also use view('view reference');
-		$pdf->loadHTML('<h1 style="background: green;">Dit is een test html deel</h1>');
+		$pdf->loadHTML(view('TicketPDF.pdftemplate'));
 
 		// Returns PDF
 		return $pdf->stream();
