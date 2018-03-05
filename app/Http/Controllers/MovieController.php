@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Movie;
 use App;
-// use Illuminate\Http\Request;
 use App\Product;
 use App\Http\Requests;
 use GuzzleHttp\Client;
 use GuzzleHttp\Message\Request;
 use GuzzleHttp\Message\Response;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class MovieController extends Controller
 {
@@ -32,8 +32,9 @@ class MovieController extends Controller
 
     public function show($id)
     {
+    	$loggedIn = Auth::check();
         $results = Movie::where('movieId', $id)->get();
-        return view('movie', compact('results'));
+        return view('movie', compact('results', 'loggedIn'));
     }
 
     function edit($id)

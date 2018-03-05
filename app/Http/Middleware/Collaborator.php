@@ -22,13 +22,14 @@ class Collaborator
             {
                 return $next($request);
             }
-            else {
-                return redirect('/');
+            else
+            {
+                return redirect()->back();
             }
         }
         catch(\Exception $e)
         {
-            return redirect('/');
+            return redirect()->back();
         }
 
     }
