@@ -16,7 +16,7 @@ class MovieController extends Controller
 
     public function create()
     {
-        //
+        
     }
 
     public function store(Request $request)
@@ -26,8 +26,10 @@ class MovieController extends Controller
 
     public function show($id)
     {
-        //
+        $results = Movie::where('movieId', $id)->get();
+        return view('movie', compact('results'));
     }
+
     function edit($id)
     {
         $movie = Movie::where('movieId', $id)->get();
