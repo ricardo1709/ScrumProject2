@@ -10,6 +10,7 @@ use App\Http\Requests;
 use GuzzleHttp\Client;
 use GuzzleHttp\Message\Request;
 use GuzzleHttp\Message\Response;
+use Illuminate\Support\Facades\DB;
 
 class MovieController extends Controller
 {
@@ -57,6 +58,8 @@ class MovieController extends Controller
     	$api_response = $client->get('http://www.omdbapi.com/?i=tt3896198&apikey=11afb677');
     	$response = $api_response->getBody();
     	$movies = json_decode($response);
-        return view('movies.index', compact('movies'));
+        DB::table('movies')->insert(
+            ['movieTitle' => $movies->Title, 'movieDescription' => $movies->Plot, 'moviePrice' => 0]
+        );
     }
 }
