@@ -8,11 +8,13 @@
     <title>Document</title>
     <style>
         h1 {
-            background: #000;
+            background: #999999;
         }
     </style>
 </head>
 <body>
     <h1>Hallo</h1>
+    <img src="data:image/png;base64,' . {{ $imgBarcode }} . '" alt="">
+    <p>{{ $barcode }}</p>
 </body>
 </html>
