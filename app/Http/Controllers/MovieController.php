@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Movie;
 use App;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class MovieController extends Controller
@@ -26,8 +27,9 @@ class MovieController extends Controller
 
     public function show($id)
     {
+    	$loggedIn = Auth::check();
         $results = Movie::where('movieId', $id)->get();
-        return view('movie', compact('results'));
+        return view('movie', compact('results', 'loggedIn'));
     }
 
     function edit($id)
