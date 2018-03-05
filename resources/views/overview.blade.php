@@ -6,7 +6,7 @@
         <div class="Movie">
             <img src="{{$movie->imageSource}}" alt="">
             <div>
-                <h3>{{$movie->movieTitle}}</h3>
+                <h3><a href="{{ action('MovieController@show', $movie->movieId ) }}">{{$movie->movieTitle}}</a></h3>
                 <p>{{$movie->movieDescription}}</p>
             </div>
         </div>
