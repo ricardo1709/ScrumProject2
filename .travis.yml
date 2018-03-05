@@ -5,6 +5,7 @@ php:
 
 before_script:
   - composer require dompdf/dompdf
+  - composer require phpunit/phpunit
   - composer install --no-interaction --no-scripts
 
 env:
