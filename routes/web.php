@@ -17,6 +17,10 @@ Route::get('/', function (){
     return redirect('/movies');
 });
 
+Route::get('/ticket', function (){
+    return redirect('/ticket');
+});
+
 /*
 |
 | When you use ::get, you only get that function you call in. 
@@ -24,6 +28,7 @@ Route::get('/', function (){
 |
 */
 Route::resource('movies', 'MovieController');
+Route::resource('ticket', 'TicketController');
 
 Auth::routes();
 

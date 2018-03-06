@@ -9,10 +9,15 @@ use Illuminate\Support\Facades\Mail;
 
 class TicketController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('made.ticket')->only('show');
+    }
 
     public function index()
     {
-        //
+        $hi = 'Hello';
+        return view('ticket', compact('hi'));
     }
 
     public function create()
