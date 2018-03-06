@@ -20,7 +20,13 @@
 </div>
 
 <div class="reservebutton mt-5 mb-5">
-    <button type="button" class="btn btn-primary btn-lg btn-block">Reserveer</button>
+    @if($loggedIn == true)
+        <button type="button" class="btn btn-primary btn-lg btn-block">Reserveer</button>
+    @else
+        <div class="text-center">
+            <button type="button" class="btn btn-secondary disabled btn-lg btn-block">Je moet ingelogged zijn om deze film te kunnen reserveren!</button>
+        </div>
+    @endif
 </div>
 
 <div class="moviedescription">

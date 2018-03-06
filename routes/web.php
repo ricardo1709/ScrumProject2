@@ -27,7 +27,6 @@ Route::resource('movies', 'MovieController');
 Auth::routes();
 
 
-
 Route::group(['middleware'=>['auth']], function (){
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/bestellen', 'HomeController@index')->name('home');
@@ -38,6 +37,10 @@ Route::group(['middleware'=>['auth']], function (){
         // url for this item below is (localhost:8000/admin/movies/{id}/edit)
         Route::get('/movies/{movie}/edit', 'MovieController@edit');
         Route::post('/movies/{movie}/edit', 'MovieController@update');
+        Route::group(['middleware' => ['collaborator:3']], function(){
+        	Route::get('/movieupdate', 'MovieController@getData');
+        });
+
     });
 });
 

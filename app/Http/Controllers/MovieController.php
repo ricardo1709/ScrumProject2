@@ -4,7 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Movie;
 use App;
-use Illuminate\Http\Request;
+use App\Product;
+use App\Http\Requests;
+use GuzzleHttp\Client;
+use GuzzleHttp\Message\Request;
+use GuzzleHttp\Message\Response;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class MovieController extends Controller
 {
@@ -26,8 +32,9 @@ class MovieController extends Controller
 
     public function show($id)
     {
+    	$loggedIn = Auth::check();
         $results = Movie::where('movieId', $id)->get();
-        return view('movie', compact('results'));
+        return view('movie', compact('results', 'loggedIn'));
     }
 
     function edit($id)
@@ -45,5 +52,15 @@ class MovieController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getData(){
+    	$client = new Client();
+    	$api_response = $client->get('http://www.omdbapi.com/?i=tt3896198&apikey=11afb677');
+    	$response = $api_response->getBody();
+    	$movies = json_decode($response);
+        DB::table('movies')->insert(
+            ['movieTitle' => $movies->Title, 'movieDescription' => $movies->Plot, 'moviePrice' => 0]
+        );
     }
 }
