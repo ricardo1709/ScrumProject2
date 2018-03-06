@@ -14,21 +14,22 @@ class Collaborator
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next, $role = 1)
     {
         try
         {
-            if (Auth::user()->role >= 1)
+            if (Auth::user()->role >= $role)
             {
                 return $next($request);
             }
-            else {
-                return redirect('/');
+            else
+            {
+                return redirect()->back();
             }
         }
         catch(\Exception $e)
         {
-            return redirect('/');
+            return redirect()->back();
         }
 
     }
