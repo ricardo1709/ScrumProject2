@@ -42,8 +42,15 @@ class MovieController extends Controller
     public function show($id)
     {
     	$loggedIn = Auth::check();
-        $results = Movie::where('movieId', $id)->get();
-        return view('movie', compact('results', 'loggedIn'));
+        //$results = Movie::where('movieId', $id)->get();
+        $movieInfo = DB::table('movies')->where('movieId', $id)->first();
+        $title = $movieInfo->movieTitle;
+        $desc = $movieInfo->movieDescription;
+        $runtime = $movieInfo->speeltijd;
+        $genre = $movieInfo->genre; 
+        
+        //dd($genre);
+        return view('movie', compact('loggedIn', 'title', 'desc', 'runtime', 'genre'));
     }
 
     function edit($id)
