@@ -28,7 +28,7 @@ Route::get('/ticket', function (){
 |
 */
 Route::resource('movies', 'MovieController');
-Route::resource('ticket', 'TicketController');
+//Route::resource('ticket', 'TicketController');
 
 Auth::routes();
 
@@ -51,7 +51,7 @@ Route::group(['middleware'=>['auth']], function (){
         });
 
     });
-    Route::group(['middleware' => ['ticketowner']], function (){
+    Route::group(['middleware' => ['ticketowner', 'tickettimeout']], function (){
         Route::get('/ticket/{id}/view', 'TicketController@show');
     });
 });

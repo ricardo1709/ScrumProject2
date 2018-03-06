@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Ticket;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 

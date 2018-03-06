@@ -61,5 +61,6 @@ class Kernel extends HttpKernel
         'collaborator' => \App\Http\Middleware\Collaborator::class,
         'made.ticket' => \App\Http\Middleware\IsTicketMade::class,
         'ticketowner' => \App\Http\Middleware\TicketOwner::class,
+        'tickettimeout' => \App\Http\Middleware\TicketTimeout::class,
     ];
 }

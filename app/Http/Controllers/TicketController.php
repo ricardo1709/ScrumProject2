@@ -16,8 +16,7 @@ class TicketController extends Controller
 
     public function index()
     {
-        $hi = 'Hello';
-        return view('ticket', compact('hi'));
+        //
     }
 
     public function create()
@@ -84,7 +83,7 @@ class TicketController extends Controller
             );
         }
 
-        Mail::to($user)->send(new \App\Mail\Ticket($transaction));
+        //Mail::to($user)->send(new \App\Mail\Ticket($transaction));
 
         return redirect()->back();
     }
