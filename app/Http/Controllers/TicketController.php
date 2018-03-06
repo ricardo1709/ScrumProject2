@@ -21,53 +21,26 @@ class TicketController extends Controller
 
     public function create()
     {
-        $user = Auth::user();
-//        $movie = $request->get('movie');
-//        $seats = $request->get('seats');
-        $seats = [3,4];
-        $movie = 1;
-        var_dump($seats);
-
-        $transaction = \App\Transaction::query()->insertGetId(
-            [ 'userId' => $user->id, 'movieId' => $movie, 'payedAmount' => 10.00]
-        );
-
-        foreach ($seats as $seat)
-        {
-            $ticket = \App\Ticket::query()->insertGetId(
-                [ 'seatId' => $seat, 'movieId' => $movie,
-                    'transactionId' => $transaction, 'barcode' => "123456789"]
-            );
-
-            \App\Reserve::query()->insert(
-                [ 'seatId' => $seat, 'movieId' => $movie,
-                    'transactionId' => $transaction, 'ticketId' => $ticket,
-                    'userId' => $user->id]
-            );
-        }
-
-        Mail::to($user)->send(new \App\Mail\Ticket($transaction));
-
-        return redirect('/movies');
+       //
     }
 
     /**
      * @param Request $request
      * whit movie id as movie,
      * whit array of seats id as seats;
+     * @return mixed
      */
 
     public function store(Request $request)
     {
-        $user = Auth::user()->id;
-//        $movie = $request->get('movie');
-//        $seats = $request->get('seats');
-        $seats = [3,4];
-        $movie = 1;
-        var_dump($seats);
+        $user = Auth::user();
+        $movie = $request->get('movie');
+        $seats = $request->get('seats');
+        //$seats = [3,4];
+        //$movie = 1;
 
         $transaction = \App\Transaction::query()->insertGetId(
-          [ 'userId' => $user, 'movieId' => $movie, 'payedAmount' => 10.00]
+          [ 'userId' => $user->id, 'movieId' => $movie, 'payedAmount' => 10.00]
         );
 
         foreach ($seats as $seat)
@@ -79,7 +52,8 @@ class TicketController extends Controller
 
             \App\Reserve::query()->insert(
                 [ 'seatId' => $seat, 'movieId' => $movie,
-                    'transactionId' => $transaction, 'ticketId' => $ticket]
+                    'transactionId' => $transaction, 'ticketId' => $ticket,
+                    'userId' => $user->id]
             );
         }
 
@@ -146,7 +120,8 @@ class TicketController extends Controller
 	{
 		$imgBarcode = $this->createBarcode($barcode);
 
-		return view('TicketPDF.pdftemplate', compact('imgBarcode', 'barcode'));
+		return view('TicketPDF.pdftemplate', compact('imgBarcode', 'barcode'))->with('ticket', $ticket)->with('movie', $ticket->reserve->movie)
+            ->with('room', $ticket->seat->room)->with('planning', $ticket->reserve->movie->planning);
 	}
 
 	// Use 'composer require milon/barcode' to obtain barcode generator
