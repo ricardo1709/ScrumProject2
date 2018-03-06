@@ -126,18 +126,12 @@ class TicketController extends Controller
 	// Add use App; if it not exists on the top of the file.
 	// To get domPDF:
 	//      composer require dompdf/dompdf
-    /**
-     *
-     * @deprecated
-     * @return mixed
-     */
-
 	public function createPDF()
 	{
         $pdf = \App::make('dompdf.wrapper');
 
         // Loads HTML into generator, can also use file reference to convert.
-        $pdf->loadHTML('<h1>Dit is een test html deel</h1>');
+        $pdf->loadHTML($this->loadPDFtemplate("9592954","959292"));
 
         // Returns PDF
         return $pdf->stream();
