@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Movie;
 use App;
+use Illuminate\Http\Request as Http_Request;
 use App\Product;
 use App\Http\Requests;
 use GuzzleHttp\Client;
@@ -25,9 +26,17 @@ class MovieController extends Controller
         
     }
 
-    public function store(Request $request)
+    public function store(Http_Request $request)
     {
-        //
+        $url = 'http://www.omdbapi.com/?i=tt3896198&apikey=11afb677&t=' . $request->get('movieAdd');
+        $client = new Client();
+        $api_response = $client->get($url);
+        $response = $api_response->getBody();
+        $movies = json_decode($response);
+        DB::table('movies')->insert(
+            ['movieTitle' => $movies->Title, 'movieDescription' => $movies->Plot, 'moviePrice' => 0]
+        );
+        return redirect('/admin/movieupdate');
     }
 
     public function show($id)
@@ -54,9 +63,16 @@ class MovieController extends Controller
         //
     }
 
-    public function getData(){
+    public function movieAdd(){
+
+
+        return view('Admin/addMovie');
+    }
+
+    public function addMovie($require){
+        $url = 'http://www.omdbapi.com/?i=tt3896198&apikey=11afb677&t=' . $require->get('movieAdd');
     	$client = new Client();
-    	$api_response = $client->get('http://www.omdbapi.com/?i=tt3896198&apikey=11afb677');
+    	$api_response = $client->get($url);
     	$response = $api_response->getBody();
     	$movies = json_decode($response);
         DB::table('movies')->insert(

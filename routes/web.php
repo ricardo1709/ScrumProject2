@@ -38,7 +38,8 @@ Route::group(['middleware'=>['auth']], function (){
         Route::get('/movies/{movie}/edit', 'MovieController@edit');
         Route::post('/movies/{movie}/edit', 'MovieController@update');
         Route::group(['middleware' => ['collaborator:3']], function(){
-        	Route::get('/movieupdate', 'MovieController@getData');
+        	Route::get('/movieupdate', 'MovieController@movieAdd');
+            Route::post('/movieupdate', 'MovieController@store');
         });
 
     });
