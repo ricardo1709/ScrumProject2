@@ -4,7 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Movie;
 use App;
-use Illuminate\Http\Request;
+use Illuminate\Http\Request as Http_Request;
+use App\Product;
+use App\Http\Requests;
+use GuzzleHttp\Client;
+use GuzzleHttp\Message\Request;
+use GuzzleHttp\Message\Response;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class MovieController extends Controller
 {
@@ -19,15 +26,31 @@ class MovieController extends Controller
         
     }
 
-    public function store(Request $request)
+    public function store(Http_Request $request)
     {
-        //
+        $url = 'http://www.omdbapi.com/?i=tt3896198&apikey=11afb677&t=' . $request->get('movieAdd');
+        $client = new Client();
+        $api_response = $client->get($url);
+        $response = $api_response->getBody();
+        $movies = json_decode($response);
+        DB::table('movies')->insert(
+            ['movieTitle' => $movies->Title, 'movieDescription' => $movies->Plot, 'moviePrice' => 0, 'speeltijd' => $movies->Runtime, 'genre' => $movies->Genre]
+        );
+        return redirect('/admin/movieupdate');
     }
 
     public function show($id)
     {
-        $results = Movie::where('movieId', $id)->get();
-        return view('movie', compact('results'));
+    	$loggedIn = Auth::check();
+        //$results = Movie::where('movieId', $id)->get();
+        $movieInfo = DB::table('movies')->where('movieId', $id)->first();
+        $title = $movieInfo->movieTitle;
+        $desc = $movieInfo->movieDescription;
+        $runtime = $movieInfo->speeltijd;
+        $genre = $movieInfo->genre; 
+        
+        //dd($genre);
+        return view('movie', compact('loggedIn', 'title', 'desc', 'runtime', 'genre'));
     }
 
     function edit($id)
@@ -45,5 +68,22 @@ class MovieController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function movieAdd(){
+
+
+        return view('Admin/addMovie');
+    }
+
+    public function addMovie($require){
+        $url = 'http://www.omdbapi.com/?i=tt3896198&apikey=11afb677&t=' . $require->get('movieAdd');
+    	$client = new Client();
+    	$api_response = $client->get($url);
+    	$response = $api_response->getBody();
+    	$movies = json_decode($response);
+        DB::table('movies')->insert(
+            ['movieTitle' => $movies->Title, 'movieDescription' => $movies->Plot, 'moviePrice' => 0]
+        );
     }
 }
