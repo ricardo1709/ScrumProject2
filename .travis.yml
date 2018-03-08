@@ -4,9 +4,10 @@ php:
   - 7.1
 
 before_script:
-  - composer require dompdf/dompdf
-  - composer require phpunit/phpunit
-  - composer install --no-interaction --no-scripts
+  - cp .env.travis .env
+  - mysql -e 'create database homestead_test;'
+  - composer self-update
+  - composer install --no-interaction
 
 env:
   - APP_KEY=base64:oKkca01Gaxi9n+4iJlF6VL1QIHp49Ln6VTa6N61O4Ws= AMO_USE_MIGRATION=yes APP_ENV=local
