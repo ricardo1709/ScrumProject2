@@ -18,7 +18,7 @@ class CreateSeats extends Migration
             $table->integer('roomId')->unsigned();
             $table->boolean('isGereserveerd');
 
-            $table->foreign('roomId')->references('roomId')->on('Rooms');
+            $table->foreign('roomId')->references('roomId')->on('rooms');
         });
     }
 
