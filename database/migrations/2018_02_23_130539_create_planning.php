@@ -19,8 +19,8 @@ class CreatePlanning extends Migration
             $table->integer('roomId')->unsigned();
             $table->timestamp('time');
 
-            $table->foreign('roomId')->references('roomId')->on('Rooms');
-            $table->foreign('movieId')->references('movieId')->on('Movies');
+            $table->foreign('roomId')->references('roomId')->on('rooms');
+            $table->foreign('movieId')->references('movieId')->on('movies');
         });
     }
 
