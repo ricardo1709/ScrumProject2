@@ -13,7 +13,10 @@
     @endphp
 
     @foreach($tickets as $ticket)
-        <a href="localhost:8000/ticket/{{ $ticket->ticketId }}/view">ticket {{ ++$index }}</a>
+        <a href="http://localhost:8000/ticket/{{ $ticket->ticketId }}/view" type="application/pdf">
+            <embed width="100%" height="100%" name="plugin" id="plugin" src="http://localhost:8000/ticket/{{ $ticket->ticketId }}/view" type="application/pdf" internalinstanceid="20">
+            ticket {{ ++$index }}
+        </a>
     @endforeach
 </body>
 </html>
