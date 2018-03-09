@@ -15,6 +15,15 @@
                     @endif
 
                     You are logged in!
+                    <form action="localhost:8000/admin/ticket" method="post">
+                        {{ csrf_field() }}
+                        <input name="seats[]" type="text">
+                        <input name="seats[]" type="text">
+
+                        <input name="movie" type="text">
+
+                        <input type="submit" value="send">
+                    </form>
                 </div>
             </div>
         </div>

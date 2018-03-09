@@ -1,5 +1,6 @@
 <?php
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,16 +12,44 @@
 |
 */
 
-Route::get('/bestellen', 'HomeController@index')->name('home');
 
-Route::get('/', 'MovieController@index');
+Route::get('/', function (){
+    return redirect('/movies');
+});
 
-Route::resource('movies', 'MovieController');
+/*
+|
+| When you use ::get, you only get that function you call in. 
+| With ::resource, Laravel knows all the functions and you do not have to declare them seperately.
+|
+*/
 
 Auth::routes();
+Route::get('/movies', 'MovieController@index');
+Route::get('/movies/{id}', 'MovieController@show');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['middleware'=>['auth']], function (){
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/bestellen', 'HomeController@index')->name('home');
 
-Auth::routes();
+    Route::group(['middleware' => ['collaborator'], 'prefix' => '/admin'], function (){
+        // localhost:8000/admin/
 
-Route::get('/home', 'HomeController@index')->name('home');
+        // url for this item below is (localhost:8000/admin/movies/{id}/edit)
+        Route::get('/movies/{movie}/edit', 'MovieController@edit');
+        Route::post('/movies/{movie}/edit', 'MovieController@update');
+        Route::get('/ticket/create', 'TicketController@create');
+        Route::post('/ticket/create', 'TicketController@store');
+
+        Route::group(['middleware' => ['collaborator:3']], function(){
+        	Route::get('/movieupdate', 'MovieController@movieAdd');
+            Route::post('/movieupdate', 'MovieController@store');
+        });
+
+    });
+    Route::group(['middleware' => ['ticketowner', 'tickettimeout']], function (){
+        Route::get('/ticket/{id}/view', 'TicketController@show');
+    });
+});
+
+
