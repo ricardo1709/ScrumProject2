@@ -104,6 +104,13 @@ class TicketController extends Controller
 	// Add use App; if it not exists on the top of the file.
 	// To get domPDF:
 	//      composer require dompdf/dompdf
+    /**
+     * @deprecated will be removed later
+     * @since 0.1v2s
+     * @example code for PDF
+     * @return mixed
+     * @uses dompdf/dompdf, milon/barcode
+     */
 	public function createPDF()
 	{
         $pdf = \App::make('dompdf.wrapper');
