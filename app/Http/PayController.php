@@ -17,8 +17,13 @@ class PayController extends Controller
 
         $allseats = $seats . $loveseats;
 
-        //medewerker if statement hier de dan een andere view laat zien!
-        return view('paysuccess', ['allseats' => $allseats
-    ]);
+	    if (Auth::user()->role >= 1)
+	    {
+		    return view();
+	    }
+	    else {
+		    return view('paysuccess', ['allseats' => $allseats
+		    ]);
+	    }
     }
 }
