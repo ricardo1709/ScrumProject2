@@ -17,21 +17,16 @@ Route::get('/', function (){
     return redirect('/movies');
 });
 
-Route::get('/ticket', function (){
-    return redirect('/ticket');
-});
-
 /*
 |
 | When you use ::get, you only get that function you call in. 
 | With ::resource, Laravel knows all the functions and you do not have to declare them seperately.
 |
 */
-Route::resource('movies', 'MovieController');
-//Route::resource('ticket', 'TicketController');
 
 Auth::routes();
-
+Route::get('/movies', 'MovieController@index');
+Route::get('/movies/{id}', 'MovieController@show');
 
 Route::group(['middleware'=>['auth']], function (){
     Route::get('/home', 'HomeController@index')->name('home');

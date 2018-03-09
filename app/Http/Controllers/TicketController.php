@@ -11,7 +11,7 @@ class TicketController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('made.ticket')->only('show');
+        
     }
 
     public function index()
