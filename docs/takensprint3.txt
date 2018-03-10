@@ -1,0 +1,80 @@
+Taken sprint 3
+-------------------------------------
+user story 1-------------------------
+- begintijd van de film ophalen
+- huidige tijd ophalen
+- ticket overzicht view
+   - html tabel aanmaken
+   - alle tickets tonen inc. stoel nummer en begintijd film + eindtijd
+   - cancel button toevoegen
+- cancel view
+   - ticket id
+   - bevesteging verwijderen
+   - film naam
+- ticket controller met een cancel method toevoegen (ticket verwijderen)
+- ticket controller index method
+- confirmation email design (wireframe)
+- confirmation mail sturen
+
+user story 2
+- bestaat al
+
+user story 3 & 4
+- DB tabel global vars aanmaken
+- loveseat toeslag aan global vars toevoegen
+- stoelprijs 
+- ticket create functie toevoegen isLoveseat()
+- toeslag verkekenen in geval van loveseat
+- adminPrijs view
+   - input veld nieuwe prijs
+   - label huidige prijs
+   - send button
+- adminPrijs controller
+   - update functie die het in de database verandert
+   - edit funtie voor show aangepaste data
+   - index method voor het tonen van de huidige prijs
+    
+user story 5
+- medewerkerAnuleer view 
+   - input voor barcode
+ 
+user story 6
+- Movie index page aanpassen
+  - klikbare genres (input)
+- movieController functie show uitbreiden met genre kiezen
+
+Overige
+- ERD global vars tabel toevoegen
+- ERD movies controlleren op filmprijs en evt. aanpassen
+- ticket create functie aanpassen (prijs laten genereren ipv uit database pakken)
+- wireframe, design, controller & view voor het maken van een film planning
+- movie overview aanpassen alleen ingeplande films tonen
+
+Beschikbare stoelen view
+- view waar je zalen kan selecteren
+- view voor de beschikbaarheid van stoelen in de geselecteerde zaal
+
+----------------------------------------------------------------
+WIREFRAMES
+- movies overview
+- movie desc page
++ movies toevoegen
++ mijn bestellingen
+- ticketbestellen
+  - stoel kiezen/aantal plaatsen
+  - prijs kiezen
+  - overzicht
+  + betalings afronden(gebruiker/medewerker)
+- Ticket scanner
+
+DESIGN
++ movies overview
++ movie desc
++ movies toevoegen
++ mijn bestellingen
++ ticketbestellen
+  + stoel kiezen/aantal plaatsen
+  + prijs kiezen
+  + overzicht
+  + betalings afronden(gebruiker/medewerker)
++ Ticket scanner
