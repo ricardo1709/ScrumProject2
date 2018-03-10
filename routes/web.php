@@ -17,6 +17,10 @@ Route::get('/', function (){
     return redirect('/movies');
 });
 
+Route::get('/ticket', function (){
+    return redirect('/ticket');
+});
+
 /*
 |
 | When you use ::get, you only get that function you call in. 
@@ -24,6 +28,7 @@ Route::get('/', function (){
 |
 */
 Route::resource('movies', 'MovieController');
+//Route::resource('ticket', 'TicketController');
 
 Auth::routes();
 
@@ -39,6 +44,7 @@ Route::group(['middleware'=>['auth']], function (){
         Route::get('/movies/{movie}/edit', 'MovieController@edit');
         Route::post('/movies/{movie}/edit', 'MovieController@update');
         Route::get('/ticket/create', 'TicketController@create');
+        Route::post('/ticket/create', 'TicketController@store');
 
         Route::group(['middleware' => ['collaborator:3']], function(){
         	Route::get('/movieupdate', 'MovieController@movieAdd');
@@ -46,7 +52,7 @@ Route::group(['middleware'=>['auth']], function (){
         });
 
     });
-    Route::group(['middleware' => ['ticketowner']], function (){
+    Route::group(['middleware' => ['ticketowner', 'tickettimeout']], function (){
         Route::get('/ticket/{id}/view', 'TicketController@show');
     });
 });

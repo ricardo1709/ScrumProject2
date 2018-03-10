@@ -14,7 +14,7 @@ class UpdateMovie extends Migration
     public function up()
     {
         Schema::table('movies', function (Blueprint $table) {
-            $table->integer('speeltijd');
+            $table->text('speeltijd');
             $table->text('genre');  
         });
     }

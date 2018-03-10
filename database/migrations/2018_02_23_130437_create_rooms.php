@@ -13,7 +13,7 @@ class CreateRooms extends Migration
      */
     public function up()
     {
-        Schema::create('Rooms', function(Blueprint $table){
+        Schema::create('rooms', function(Blueprint $table){
         	$table->increments('roomId');
         	$table->integer('seats')->unsigned();
         	$table->integer('loverSeats')->unsigned();
