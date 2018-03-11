@@ -4,14 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Ticket;
+use Dompdf\Dompdf;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Milon\Barcode\DNS1D;
 
 class TicketController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('made.ticket')->only('show');
+        
     }
 
     public function index()
@@ -101,7 +103,8 @@ class TicketController extends Controller
         $ticket = Ticket::where('ticketId', '=', $id)->get()[0];
 
         // Makes a new domPDF instance
-        $pdf = \App::make('dompdf.wrapper');
+        //$pdf = \App::make('dompdf.wrapper');
+        $pdf = new Dompdf();
 
         // Loads HTML into generator, can also use file reference to convert.
         // Can also use view('view reference');
@@ -133,10 +136,17 @@ class TicketController extends Controller
 	// Add use App; if it not exists on the top of the file.
 	// To get domPDF:
 	//      composer require dompdf/dompdf
+    /**
+     * @deprecated will be removed later
+     * @since 0.1v2s
+     * @example code for PDF
+     * @return mixed
+     * @uses dompdf/dompdf, milon/barcode
+     */
 	public function createPDF()
 	{
-        $pdf = \App::make('dompdf.wrapper');
-
+        //$pdf = \App::make('dompdf.wrapper');
+	    $pdf = new Dompdf();
         // Loads HTML into generator, can also use file reference to convert.
         $pdf->loadHTML($this->loadPDFtemplate("9592954","959292"));
 
@@ -158,7 +168,7 @@ class TicketController extends Controller
 	public function createBarcode($barcode)
 	{
 		// Generates barcode img
-		$imgBarcode = \DNS1D::getBarcodePNG($barcode, "C39");
+		$imgBarcode = DNS1D::getBarcodePNG($barcode, "C39");
 
 		// Returns the template view, with imgBarcode and original barcode value
     	return $imgBarcode;

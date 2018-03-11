@@ -13,3 +13,10 @@ before_script:
 
 script:
   - vendor/bin/phpunit
+
+# safelist
+branches:
+  only:
+  - master
+  - testing
+  - development
