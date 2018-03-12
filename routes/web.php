@@ -1,5 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,11 +19,16 @@ Route::get('/', function (){
     return redirect('/movies');
 });
 
-Route::get('/movies', 'MovieController@index')->name('movies');
+/*
+|
+| When you use ::get, you only get that function you call in. 
+| With ::resource, Laravel knows all the functions and you do not have to declare them seperately.
+|
+*/
 
 Auth::routes();
-
-
+Route::get('/movies', 'MovieController@index');
+Route::get('/movies/{id}', 'MovieController@show');
 
 Route::group(['middleware'=>['auth']], function (){
     Route::get('/home', 'HomeController@index')->name('home');
@@ -35,8 +43,18 @@ Route::group(['middleware'=>['auth']], function (){
         // url for this item below is (localhost:8000/admin/movies/{id}/edit)
         Route::get('/movies/{movie}/edit', 'MovieController@edit');
         Route::post('/movies/{movie}/edit', 'MovieController@update');
+        Route::get('/ticket/create', 'TicketController@create');
+        Route::post('/ticket/create', 'TicketController@store');
+
+        Route::group(['middleware' => ['collaborator:3']], function(){
+        	Route::get('/movieupdate', 'MovieController@movieAdd');
+            Route::post('/movieupdate', 'MovieController@store');
+        });
+
+    });
+    Route::group(['middleware' => ['ticketowner', 'tickettimeout']], function (){
+        Route::get('/ticket/{id}/view', 'TicketController@show');
     });
 });
 
-// Temporary route to check if TicketController@createPDF functions properly
-Route::get('/createPDF', 'TicketController@createPDF');
+

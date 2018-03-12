@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Seat;
 use App\User;
-use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class SeatController extends Controller
@@ -12,7 +13,6 @@ class SeatController extends Controller
     {
     	$rooms = DB::table('rooms')->get();
     	
-
     	$seatStrings = array();
     	$loveSeatStrings = array();
 
@@ -32,4 +32,43 @@ class SeatController extends Controller
 
         //return $seatArray;
     }
+    public function create()
+    {
+        //
+    }
+
+    public function store(Request $request)
+    {
+        //
+    }
+
+    public function show(Seat $seat)
+    {
+        //
+    }
+
+    public function edit(Seat $seat)
+    {
+        //
+    }
+
+    public function update(Request $request, Seat $seat)
+    {
+        //
+    }
+
+    public function destroy(Seat $seat)
+    {
+        //
+    }
+
+    public function GenerateRandomSeat($totalSeats, $currentSeat)
+    {
+    	do {
+		    $newSeat = rand(0, $totalSeats);
+	    } while($newSeat == $currentSeat);
+
+    	return $newSeat;
+    }
+
 }

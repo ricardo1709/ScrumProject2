@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRooms extends Migration
+class CreateBarcodeScannersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateRooms extends Migration
      */
     public function up()
     {
-        Schema::create('rooms', function(Blueprint $table){
-        	$table->increments('roomId');
-        	$table->integer('seats')->unsigned();
-        	$table->integer('loverSeats')->unsigned();
-        	$table->integer('loverRow')->unsigned();
-        	$table->integer('rows')->unsigned();
+        Schema::create('barcode_scanners', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('barcode');
+            $table->string('movie_name');
+            $table->integer('checked');
+            $table->timestamps();
         });
     }
 
@@ -29,6 +29,6 @@ class CreateRooms extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Rooms');
+        Schema::dropIfExists('barcode_scanners');
     }
 }
