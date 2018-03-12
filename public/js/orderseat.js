@@ -2,22 +2,26 @@
 var selectedSeats = [];
 var selectedLoveSeats = [];
 
-function addSeat(n, e) {
+function addSeat(n, button) {
 	if (Contains(selectedSeats, n)) {
-		alert("Stoel is al geselecteerd!");
+		//alert("Stoel is al geselecteerd!");
+		RemoveFromArray(selectedSeats, n, button);
 	}
 	else {
 		selectedSeats.push(n);
+		$(button).addClass("active")
 		UpdateView();
 	}
 }
 
-function AddLoveSeat(n) {
+function AddLoveSeat(n, button) {
 	if (Contains(selectedLoveSeats, n)) {
-		alert("Love Seat is al geselecteerd!");
+		//alert("Love Seat is al geselecteerd!");
+		RemoveFromArray(selectedLoveSeats, n, button);
 	}
 	else {
 		selectedLoveSeats.push(n);
+		$(button).addClass("active")
 		UpdateView();
 	}
 }
@@ -37,6 +41,16 @@ function Contains(thearray, theitem) {
 	return con;
 }
 
+function RemoveFromArray(thearray, theitem, button) {
+	for (var i = thearray.length - 1; i >= 0; i--) {
+		if (thearray[i] == theitem) {
+			thearray.splice(i, 1);
+		}
+	}
+	UpdateView();
+	$(button).removeClass("active")
+}
+
 function UpdateView() {
 	document.getElementById("selected").innerHTML = "";
 
@@ -54,19 +68,24 @@ function UpdateView() {
   		li.appendChild(document.createTextNode("Love Seat " + selectedLoveSeats[i]));
   		ul.appendChild(li);
 	}
-
 }
 
 function Order() {
-	if (selectedSeats.length > 0) {
+	if (selectedSeats.length > 0 || selectedLoveSeats.length > 0) {
 		//POST NAAR LARAVEL?
-		var locurl = document.getElementById("paylocation");
+		var locurl = document.getElementById("paylocation").innerHTML;
+
+		FixAjax();
+		var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
 		$.ajax({
         	type: 'POST',
         	url: locurl,
-        	data: {sseats:selectedSeats, sloveseats:selectedLoveSeats},
-        	cache: false
+        	data: {sseats:selectedSeats, sloveseats:selectedLoveSeats, _token:CSRF_TOKEN},
+        	cache: false,
+        	success: function (data) {
+        		console.log(data);
+    		}
     	});
 	}
 	else 
@@ -82,6 +101,10 @@ function Clear() {
     	selectedLoveSeats.splice(0, selectedLoveSeats.length);
 		document.getElementById("selected").innerHTML = "";
 		UpdateView();
+		var active_elements = document.getElementsByClassName("active");
+		for (var i = active_elements.length - 1; i >= 0; i--) {
+			$(active_elements[i]).removeClass("active");
+		}
 	} else {
     	alert("Cancelled");
 	}
