@@ -56,7 +56,7 @@
                                 @for ($i = 1; $i <= $room->seats; $i++)
                                 <div class="stoel">
                                     @if ($seatArray[$room->roomId][($i - 1)]->isGereserveerd == 0)
-                                    <a onclick="addSeat({{ $seatArray[$room->roomId][($i - 1)]->seatId }})">
+                                    <a onclick="addSeat({{ $seatArray[$room->roomId][($i - 1)]->seatId }}, this)">
                                     @else
                                     <a onclick="Taken()">
                                     @endif
@@ -125,6 +125,4 @@
 </div>
 <script src="js/slider.js"></script>
 <script src="js/orderseat.js"></script>
-<script src="js/jquery-3.3.1.min.js"></script>
-<script src="js/jquery-3.3.1.js"></script>
 @endsection

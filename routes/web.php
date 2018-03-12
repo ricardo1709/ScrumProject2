@@ -25,7 +25,9 @@ Auth::routes();
 Route::group(['middleware'=>['auth']], function (){
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/bestellen', 'SeatController@index')->name('order');
-    Route::post('/pay', 'PayController@index')->name('pay');
+
+    Route::post('/pay', 'PayController@store')->name('pay');
+    // Route::get('/pay', 'PayController@store')->name('pay');
 
     Route::group(['middleware' => ['collaborator'], 'prefix' => '/admin'], function (){
         // localhost:8000/admin/
