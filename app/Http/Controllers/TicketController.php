@@ -66,7 +66,8 @@ class TicketController extends Controller
     {
         $user = Auth::user();
         $movie = $request->get('movie');
-        $seats = $request->get('seats');
+        $seats = $request->get('seats', []);
+        $loveseats = $request->get('sloveseats', []);
         //$seats = [3,4];
         //$movie = 1;
 
