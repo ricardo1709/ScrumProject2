@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,14 +25,17 @@ Route::get('/', function (){
 | With ::resource, Laravel knows all the functions and you do not have to declare them seperately.
 |
 */
-Route::resource('movies', 'MovieController');
 
 Auth::routes();
-
+Route::get('/movies', 'MovieController@index');
+Route::get('/movies/{id}', 'MovieController@show');
 
 Route::group(['middleware'=>['auth']], function (){
     Route::get('/home', 'HomeController@index')->name('home');
-    Route::get('/bestellen', 'HomeController@index')->name('home');
+    Route::get('/bestellen', 'SeatController@index')->name('order');
+
+    Route::post('/pay', 'PayController@store')->name('pay');
+    // Route::get('/pay', 'PayController@store')->name('pay');
 
     Route::group(['middleware' => ['collaborator'], 'prefix' => '/admin'], function (){
         // localhost:8000/admin/
@@ -39,6 +44,7 @@ Route::group(['middleware'=>['auth']], function (){
         Route::get('/movies/{movie}/edit', 'MovieController@edit');
         Route::post('/movies/{movie}/edit', 'MovieController@update');
         Route::get('/ticket/create', 'TicketController@create');
+        Route::post('/ticket/create', 'TicketController@store');
 
         Route::group(['middleware' => ['collaborator:3']], function(){
         	Route::get('/movieupdate', 'MovieController@movieAdd');
@@ -46,7 +52,7 @@ Route::group(['middleware'=>['auth']], function (){
         });
 
     });
-    Route::group(['middleware' => ['ticketowner']], function (){
+    Route::group(['middleware' => ['ticketowner', 'tickettimeout']], function (){
         Route::get('/ticket/{id}/view', 'TicketController@show');
     });
 });

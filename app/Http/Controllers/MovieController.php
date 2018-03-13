@@ -3,13 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Movie;
-use App;
-use Illuminate\Http\Request as Http_Request;
-use App\Product;
-use App\Http\Requests;
+use Illuminate\Http\Request;
+//use App\Product;
+//use App\Http\Requests;
 use GuzzleHttp\Client;
-use GuzzleHttp\Message\Request;
-use GuzzleHttp\Message\Response;
+//use GuzzleHttp\Message\Request;
+//use GuzzleHttp\Message\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,7 +25,7 @@ class MovieController extends Controller
         
     }
 
-    public function store(Http_Request $request)
+    public function store(Request $request)
     {
         $url = 'http://www.omdbapi.com/?i=tt3896198&apikey=11afb677&t=' . $request->get('movieAdd');
         $client = new Client();
@@ -76,7 +75,7 @@ class MovieController extends Controller
         return view('Admin/addMovie');
     }
 
-    public function addMovie($require){
+    public function addMovie(Request $require){
         $url = 'http://www.omdbapi.com/?i=tt3896198&apikey=11afb677&t=' . $require->get('movieAdd');
     	$client = new Client();
     	$api_response = $client->get($url);
