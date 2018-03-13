@@ -14,7 +14,7 @@ class Globalvars extends Migration
     public function up()
     {
         Schema::create('globalvars', function (Blueprint $table) {
-            $table->interger('id');
+            $table->integer('id');
             $table->string('keyname')->primary();
             $table->text('value');
         });
