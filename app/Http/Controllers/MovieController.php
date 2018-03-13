@@ -15,13 +15,76 @@ use Illuminate\Support\Facades\Auth;
 
 class MovieController extends Controller
 {
-    public function index()
-    {
-        $movies = Movie::orderBy('created_at','desc')->paginate(10);
-        return view('overview', compact('movies'));
-    }
+	public function index()
+	{
+		// This if statement checks if a genre has been selected and also checks if a radiobutton has been selected
+		// so that when the page refreshes the radiobutton doesn't get unchecked
+		if(!empty($_GET['genre'])) {
+			$movies = Movie::where('genre', $_GET['genre'])
+			               ->orWhere('genre', 'like', '%' . $_GET['genre'] . '%')->get();
+			$radioSelected = $_GET['genre'];
+		} else {
+			$movies = Movie::get();
+			$radioSelected = "All";
+		}
 
-    public function create()
+		$movieGenres = $this->getGenres();
+
+		return view('overview', compact('movies','movieGenres', 'radioSelected'));
+	}
+
+
+	public function getGenres()
+	{
+
+		$movieGenres = [];
+
+		$finishGenres = [];
+
+		$movies = Movie::get();
+
+		// Generates an array with movie genres
+		foreach($movies as $movie) {
+			if(!in_array($movie->genre, $movieGenres)){
+				$movieGenres[] = $movie->genre;
+			}
+		}
+
+		// Seperates genres that are in one string but contain a comma.
+		foreach($movieGenres as $movieGenre) {
+			$newGenres = explode(',', $movieGenre);
+			foreach($newGenres as $genre) {
+				$cleanGenres[] = str_replace(' ','',$genre);
+
+			}
+		}
+
+		// Clears incorrect $movieGenres array
+		unset($movieGenres);
+		// Fills $movieGenres with correct data
+		$movieGenres = $cleanGenres;
+
+
+		// Removes double genres from array
+		foreach($movieGenres as $movieGenre) {
+			if(!in_array($movieGenre, $finishGenres)){
+				$finishGenres[] = $movieGenre;
+
+			}
+		}
+
+		// Clears incorrect $movieGenres array
+		unset($movieGenres);
+		// Fills $movieGenres with correct data
+		$movieGenres = $finishGenres;
+
+		sort($movieGenres);
+
+		return $movieGenres;
+	}
+
+
+	public function create()
     {
         
     }
