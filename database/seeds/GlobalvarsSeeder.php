@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class globalvars extends Seeder
+class GlobalvarsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -18,5 +18,11 @@ class globalvars extends Seeder
                 'value' => 1.1
             ]
         ];
+
+        // Create seed (console: php artisan migrate:refresh --seed)
+        foreach($vars as $var)
+        {
+            \App\GlobalVars::query()->insert($var);
+        }
     }
 }
