@@ -27,16 +27,24 @@ class MovieController extends Controller
 
     public function store(Request $request)
     {
+    	$noMovieError = null;
     	$movieTitleUrl = ucwords(strtolower($request->get('movieAdd')));
         $url = 'http://www.omdbapi.com/?i=tt3896198&apikey=11afb677&t=' . $movieTitleUrl;
         $client = new Client();
         $api_response = $client->get($url);
         $response = $api_response->getBody();
         $movies = json_decode($response);
-        DB::table('movies')->insert(
-            ['movieTitle' => $movies->Title, 'movieDescription' => $movies->Plot, 'moviePrice' => 0, 'speeltijd' => $movies->Runtime, 'genre' => $movies->Genre]
-        );
-        return redirect('/admin/movieupdate');
+        try
+		{
+	        DB::table('movies')->insert(
+	            ['movieTitle' => $movies->Title, 'movieDescription' => $movies->Plot, 'moviePrice' => 0, 'speeltijd' => $movies->Runtime, 'genre' => $movies->Genre]
+	        );
+	    }
+	    catch(\Exception $e){
+	    	//no movie found
+			$noMovieError = "invalid movie title";
+	    }
+        return view('Admin/addMovie', ['noMovieError' => $noMovieError]);
     }
 
     public function show($id)
@@ -71,9 +79,9 @@ class MovieController extends Controller
     }
 
     public function movieAdd(){
+    	$noMovieError = "";
 
-
-        return view('Admin/addMovie');
+        return view('Admin/addMovie', ['noMovieError' => $noMovieError]);
     }
 
 }
