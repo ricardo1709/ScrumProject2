@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Carbon\Carbon;
+use App\Ticket;
 
 class TicketTimeout
 {
@@ -18,7 +19,6 @@ class TicketTimeout
     {
 
         $ticket = Ticket::where('ticketId', '=', $request->id)->get()[0];
-        
         if($ticket->reserve->movie->planning->time > Carbon::now())
         {
             return $next($request);

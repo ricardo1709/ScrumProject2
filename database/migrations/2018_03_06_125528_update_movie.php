@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRooms extends Migration
+class UpdateMovie extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateRooms extends Migration
      */
     public function up()
     {
-        Schema::create('rooms', function(Blueprint $table){
-        	$table->increments('roomId');
-        	$table->integer('seats')->unsigned();
-        	$table->integer('loverSeats')->unsigned();
-        	$table->integer('loverRow')->unsigned();
-        	$table->integer('rows')->unsigned();
+        Schema::table('movies', function (Blueprint $table) {
+            $table->text('speeltijd');
+            $table->text('genre');  
         });
     }
 
@@ -29,6 +26,6 @@ class CreateRooms extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Rooms');
+        //
     }
 }

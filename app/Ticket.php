@@ -17,4 +17,10 @@ class Ticket extends Model
     {
         return $this->belongsTo(\App\Transaction::class, 'transactionId', 'transactionId');
     }
+
+    public function seat()
+    {
+        return $this->hasOne(\App\Seat::class, 'seatId', 'seatId');
+    }
+
 }

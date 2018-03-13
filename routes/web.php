@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,25 +19,23 @@ Route::get('/', function (){
     return redirect('/movies');
 });
 
-Route::get('/ticket', function (){
-    return redirect('/ticket');
-});
-
 /*
 |
 | When you use ::get, you only get that function you call in. 
 | With ::resource, Laravel knows all the functions and you do not have to declare them seperately.
 |
 */
-Route::resource('movies', 'MovieController');
-//Route::resource('ticket', 'TicketController');
 
 Auth::routes();
-
+Route::get('/movies', 'MovieController@index');
+Route::get('/movies/{id}', 'MovieController@show');
 
 Route::group(['middleware'=>['auth']], function (){
     Route::get('/home', 'HomeController@index')->name('home');
-    Route::get('/bestellen', 'HomeController@index')->name('home');
+    Route::get('/bestellen', 'SeatController@index')->name('order');
+
+    Route::post('/pay', 'PayController@store')->name('pay');
+    // Route::get('/pay', 'PayController@store')->name('pay');
 
     Route::group(['middleware' => ['collaborator'], 'prefix' => '/admin'], function (){
         // localhost:8000/admin/
@@ -44,6 +44,7 @@ Route::group(['middleware'=>['auth']], function (){
         Route::get('/movies/{movie}/edit', 'MovieController@edit');
         Route::post('/movies/{movie}/edit', 'MovieController@update');
         Route::get('/ticket/create', 'TicketController@create');
+        Route::post('/ticket/create', 'TicketController@store');
 
         Route::group(['middleware' => ['collaborator:3']], function(){
         	Route::get('/movieupdate', 'MovieController@movieAdd');
