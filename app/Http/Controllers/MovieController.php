@@ -27,7 +27,8 @@ class MovieController extends Controller
 
     public function store(Request $request)
     {
-        $url = 'http://www.omdbapi.com/?i=tt3896198&apikey=11afb677&t=' . $request->get('movieAdd');
+    	$movieTitleUrl = ucwords(strtolower($request->get('movieAdd')));
+        $url = 'http://www.omdbapi.com/?i=tt3896198&apikey=11afb677&t=' . $movieTitleUrl;
         $client = new Client();
         $api_response = $client->get($url);
         $response = $api_response->getBody();
@@ -75,14 +76,4 @@ class MovieController extends Controller
         return view('Admin/addMovie');
     }
 
-    public function addMovie(Request $require){
-        $url = 'http://www.omdbapi.com/?i=tt3896198&apikey=11afb677&t=' . $require->get('movieAdd');
-    	$client = new Client();
-    	$api_response = $client->get($url);
-    	$response = $api_response->getBody();
-    	$movies = json_decode($response);
-        DB::table('movies')->insert(
-            ['movieTitle' => $movies->Title, 'movieDescription' => $movies->Plot, 'moviePrice' => 0]
-        );
-    }
 }
