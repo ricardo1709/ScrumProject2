@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +32,12 @@ Route::get('/movies/{id}', 'MovieController@show');
 
 Route::group(['middleware'=>['auth']], function (){
     Route::get('/home', 'HomeController@index')->name('home');
-    Route::get('/bestellen', 'HomeController@index')->name('home');
+    Route::get('/bestellen', 'SeatController@index')->name('order');
+
+    Route::post('/pay', 'PayController@store')->name('pay');
+
+    Route::get('/barcodes', 'BarcodeScannerController@index');
+    // Route::get('/pay', 'PayController@store')->name('pay');
 
     Route::group(['middleware' => ['collaborator'], 'prefix' => '/admin'], function (){
         // localhost:8000/admin/
