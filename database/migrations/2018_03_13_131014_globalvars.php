@@ -15,7 +15,7 @@ class Globalvars extends Migration
     {
         Schema::create('globalvars', function (Blueprint $table) {
             $table->integer('id');
-            $table->increments('keyname');
+            $table->string('keyname')->primary();
             $table->text('value');
         });
     }
@@ -27,6 +27,6 @@ class Globalvars extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('globalvars');
     }
 }
