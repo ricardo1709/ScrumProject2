@@ -42,6 +42,10 @@ Route::group(['middleware'=>['auth']], function (){
     Route::group(['middleware' => ['collaborator'], 'prefix' => '/admin'], function (){
         // localhost:8000/admin/
 
+	    Route::get('/', function (){
+		    return view('admin');
+	    });
+
         // url for this item below is (localhost:8000/admin/movies/{id}/edit)
         Route::get('/movies/{movie}/edit', 'MovieController@edit');
         Route::post('/movies/{movie}/edit', 'MovieController@update');
