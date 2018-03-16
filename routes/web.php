@@ -37,10 +37,15 @@ Route::group(['middleware'=>['auth']], function (){
     Route::post('/pay', 'PayController@store')->name('pay');
 
     Route::get('/barcodes', 'BarcodeScannerController@index');
+    Route::post('/barcodes', 'BarcodeScannerController@check');
     // Route::get('/pay', 'PayController@store')->name('pay');
 
     Route::group(['middleware' => ['collaborator'], 'prefix' => '/admin'], function (){
         // localhost:8000/admin/
+
+	    Route::get('/', function (){
+		    return view('admin');
+	    });
 
         // url for this item below is (localhost:8000/admin/movies/{id}/edit)
         Route::get('/movies/{movie}/edit', 'MovieController@edit');
