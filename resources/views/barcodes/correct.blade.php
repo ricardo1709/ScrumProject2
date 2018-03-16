@@ -6,5 +6,7 @@
 </head>
 <body>
     <h1>Goedgekeurd {{$barcode}}</h1>
+    <p>Stoel: {{ $seat }}</p>
+    <p>Zaal: {{ $room }}</p>
 </body>
 </html>
