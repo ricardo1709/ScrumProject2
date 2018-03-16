@@ -44,7 +44,7 @@ Route::group(['middleware'=>['auth']], function (){
         // localhost:8000/admin/
 
 	    Route::get('/', function (){
-		    return view('admin');
+		    return view('admin/dashboard');
 	    });
 
         // url for this item below is (localhost:8000/admin/movies/{id}/edit)
