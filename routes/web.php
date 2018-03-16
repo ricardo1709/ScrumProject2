@@ -37,6 +37,7 @@ Route::group(['middleware'=>['auth']], function (){
     Route::post('/pay', 'PayController@store')->name('pay');
 
     Route::get('/barcodes', 'BarcodeScannerController@index');
+    Route::post('/barcodes', 'BarcodeScannerController@check');
     // Route::get('/pay', 'PayController@store')->name('pay');
 
     Route::group(['middleware' => ['collaborator'], 'prefix' => '/admin'], function (){
