@@ -8,6 +8,7 @@ use Dompdf\Dompdf;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Milon\Barcode\DNS1D;
+use Illuminate\Support\Facades\DB;
 
 class TicketController extends Controller
 {
@@ -21,35 +22,16 @@ class TicketController extends Controller
         //
     }
 
-    public function create()
-    {
+    public function create($allseatids)
+    { 
+        $tickets = array();
 
         $user = Auth::user();
-      	$movie = $request->get('movie');
-      	$seats = $request->get('seats');
-        //$seats = [3,4];
-        //$movie = 1;
-        var_dump($seats);
-
-        $transaction = \App\Transaction::query()->insertGetId(
-            [ 'userId' => $user->id, 'movieId' => $movie, 'payedAmount' => 10.00]
-        );
-
-        foreach ($seats as $seat)
+          
+        foreach($allseatids as $id)
         {
-            $ticket = \App\Ticket::query()->insertGetId(
-                [ 'seatId' => $seat, 'movieId' => $movie,
-                    'transactionId' => $transaction, 'barcode' => "123456789"]
-            );
-
-            \App\Reserve::query()->insert(
-                [ 'seatId' => $seat, 'movieId' => $movie,
-                    'transactionId' => $transaction, 'ticketId' => $ticket,
-                    'userId' => $user->id]
-            );
+            array_push($tickets, new Ticket);
         }
-
-        Mail::to($user)->send(new \App\Mail\Ticket($transaction));
 
         return redirect('/movies');
 
@@ -64,15 +46,42 @@ class TicketController extends Controller
 
     public function store(Request $request)
     {
+        $totalloveseat = 0;
+        $totalseatprice = 0;
+
         $user = Auth::user();
         $movie = $request->get('movie');
-        $seats = $request->get('seats', []);
-        $loveseats = $request->get('sloveseats', []);
+        $seats = $request->get('seats', []); 
+        $loveseatmultiplier = DB::table('globalvars')->where('keyname', 'loveseat')->value('value');
+        $seatprice = DB::table('globalvars')->where('keyname', 'seat')->value('value');
+
+        foreach($seats as $seatid)
+        {
+            $isloveseat = DB::table('seats')->where('seatId', $seatid)->value('isLoveseat');
+ 
+            if($isloveseat == 1)
+            {
+                $totalloveseat += $seatprice * $loveseatmultiplier;
+            }
+            else
+            {
+                $totalseatprice += $seatprice;
+            }
+        }
+
+        $totalprice = $totalloveseat + $totalseatprice;
+        
+        
+        
+
         //$seats = [3,4];
         //$movie = 1;
 
+
+        
+
         $transaction = \App\Transaction::query()->insertGetId(
-          [ 'userId' => $user->id, 'movieId' => $movie, 'payedAmount' => 10.00]
+          [ 'userId' => $user->id, 'movieId' => $movie, 'payedAmount' => $totalprice]
         );
 
         foreach ($seats as $seat)
