@@ -2,6 +2,31 @@
 // Fonts
 @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
 
+@font-face {
+  font-family: 'Helvetica';
+  src: url('../fonts/Helvetica-Black.woff2') format('woff2'),
+  url('../fonts/Helvetica-Black.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Minion Pro';
+  src: url('../fonts/MinionPro-Regular.woff2') format('woff2'),
+  url('../fonts/MinionPro-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url('../fonts/HelveticaNeue-Medium.woff2') format('woff2'),
+  url('../fonts/HelveticaNeue-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+
+
 // Variables
 @import "variables";
 
@@ -9,6 +34,79 @@
 @import '~bootstrap/scss/bootstrap';
 
 .navbar-laravel {
-  background-color: #fff;
+  background-color: #0f0f0f;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
+
+.navbar-brand {
+  font-family: Helvetica !important;
+  color: #fff !important;
+}
+
+.navbar-brand span {
+  color: #e95a1c !important;
+}
+
+.dropdown-menu {
+   color: #fff !important;
+ }
+
+.nav-link {
+  color: #fff !important;
+}
+
+
+// Admin Dash Layout
+.admin-main {
+  display:flex;
+  background: #333;
+}
+
+.nav-left {
+  background: url("../img/oldprojector.png") -300px no-repeat;
+  background-size: cover;
+  height: 900px;
+  width: 300px;
+  color: #fff;
+}
+
+.nav-left h3 {
+  font-family: "Helvetica Neue";
+  margin-top: 20px;
+  font-size: 20px;
+  color: #ffffff;
+  text-align: center;
+}
+
+.nav-left h4 {
+  font-family: "Helvetica Neue";
+  color: #c8c8c8;
+  margin-top: 20px;
+  margin-left: 10px;
+}
+
+.nav-left ul {
+  list-style: none;
+  padding-left: 50px;
+}
+
+.nav-left li {
+  margin: 7px 0;
+}
+
+.nav-left li>a {
+  color: #ffffff;
+  margin: 20px 25px;
+  text-decoration: none;
+}
+
+#dashboard {
+  padding: 40px;
+}
+
+.main-content {
+  width: 100%;
+}
+
+
+
