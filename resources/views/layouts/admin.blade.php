@@ -69,7 +69,7 @@
 
     <div class="admin-main">
         <div class="nav-left">
-            <h3>DASHBOARD</h3>
+            <h3><a href="/admin">DASHBOARD</a></h3>
             <ul class="list-group list-group-flush">
                 <li>
                     <h4>Films</h4>
@@ -90,7 +90,7 @@
                     <h4>Tickets</h4>
                 </li>
                 <li><a href="">Bestellen</a></li>
-                <li><a href="">Scannen</a></li>
+                <li class="@if(strpos($_SERVER['REQUEST_URI'],'barcodes')) dash-active @endif"><a href="/barcodes">Scannen</a></li>
                 <li><a href="">Annuleren</a></li>
             </ul>
         </div>
