@@ -67,3 +67,7 @@
 	font-weight: bolder;
 	text-shadow: 0px 1px #000000;
 }
+
+.error{
+	color: red;
+}
