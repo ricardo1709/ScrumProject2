@@ -15,29 +15,30 @@ class general extends Seeder
     public function run()
     {
         // users
+        // password is for all users secret
         $users = [
             [
                 'name' => 'admin',
                 'email' => 'admin@admin.com',
-                'password' => 'admin123',
+                'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm',
                 'role' => '3'
             ],
             [
                 'name' => 'owner',
                 'email' => 'owner@admin.com',
-                'password' => 'admin123',
+                'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm',
                 'role' => '2'
             ],
             [
                 'name' => 'medewerker',
                 'email' => 'medewerker@admin.com',
-                'password' => 'admin123',
+                'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm',
                 'role' => '1'
             ],
             [
                 'name' => 'custom',
                 'email' => 'custom@admin.com',
-                'password' => 'admin123'
+                'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm'
             ]
         ];
         
