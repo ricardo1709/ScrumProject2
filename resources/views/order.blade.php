@@ -125,4 +125,98 @@
 </div>
 <script src="js/slider.js"></script>
 <script src="js/orderseat.js"></script>
+
+<!-- MODALS -->
+
+<div class="modal fade" id="confirmloveseat">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Selectie Bevestigen?</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      </div>
+      <div class="modal-body">
+        <p>Love Seat <span id="loveseatnum"></span> en de vorige geselecteerde staan niet naast elkaar, weet je zeker dat je deze stoel wilt selecteren?</p>
+
+        <span id="thebutton"></span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Annuleren</button>
+        <button type="button" class="btn btn-primary" id="ForceLoveSeatButton" data-dismiss="modal">Selecteren</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="confirmseat">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Selectie Bevestigen?</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      </div>
+      <div class="modal-body">
+        <p>Stoel <span id="seatnum"></span> en de vorige geselecteerde staan niet naast elkaar, weet je zeker dat je deze stoel wilt selecteren?</p>
+
+        <span id="thebutton"></span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Annuleren</button>
+        <button type="button" class="btn btn-primary" id="ForceSeatButton" data-dismiss="modal">Selecteren</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="seattaken">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Verkeerde Selectie!</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      </div>
+      <div class="modal-body">
+        <p>Deze stoel is al bezet!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Oke</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="pleaseselect1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Verkeerde Selectie!</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      </div>
+      <div class="modal-body">
+        <p>U moet minimaal een stoel kiezen!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Oke</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="confirmclear">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Selectie Wissen?</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      </div>
+      <div class="modal-body">
+        <p>Weet u zeker dat u uw stoel selectie wil wissen?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Annuleren</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="EraseSelection()">Wissen</button>
+      </div>
+    </div>
+  </div>
+</div>
 @endsection

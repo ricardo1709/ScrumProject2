@@ -17,7 +17,10 @@
                     </div>
                     @endif
 
-                <p>U heeft betaald voor de stoelen: {{ $allseats }}</p>
+                <p>U heeft betaald voor de stoelen:</p>
+                <ul>
+                    
+                </ul>
                 
                     
             </div>

@@ -1,5 +1,6 @@
-@include('layouts.app')
+@extends('layouts.app')
 
+@section('content')
 <div class="banner">
     <div class="container-fluid">
         <div class="row">
@@ -94,4 +95,4 @@
         
     </div>
 </div>
-
+@stop
