@@ -15,12 +15,12 @@ class CreatePlanning extends Migration
     {
         Schema::create('plannings', function(Blueprint $table){
             $table->increments('planningId');
-            $table->integer('seatId')->unsigned();
-            $table->integer('zaalId')->unsigned();
-            $table->timestamps();
+            $table->integer('movieId')->unsigned();
+            $table->integer('roomId')->unsigned();
+            $table->timestamp('time');
 
-            $table->foreign('zaalId')->references('zaalId')->on('zaals');
-            $table->foreign('seatId')->references('seatId')->on('seats');
+            $table->foreign('roomId')->references('roomId')->on('rooms');
+            $table->foreign('movieId')->references('movieId')->on('movies');
         });
     }
 
@@ -32,8 +32,8 @@ class CreatePlanning extends Migration
     public function down()
     {
         Schema::table('plannings', function($table) {
-            $table->dropForeign('plannings_zaalId_foreign');
-            $table->dropForeign('plannings_seatID_foreign');
+            $table->dropForeign('plannings_roomId_foreign');
+            $table->dropForeign('plannings_movieId_foreign');
         });
         Schema::dropIfExists('plannings');
     }

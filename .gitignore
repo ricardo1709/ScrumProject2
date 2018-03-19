@@ -6,10 +6,12 @@
 /storage/*.key
 /vendor
 /.idea
+/.settings
 Homestead.json
 Homestead.yaml
 .env
 package-lock.json
 php
 npm-debug\.log
-test.txt
+.buildpath
+.project
