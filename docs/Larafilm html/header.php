@@ -27,22 +27,22 @@
             </div>
             <div class="navbar">
                 <div class="navbar-item">
-                    <img src="img/house-black-silhouette-without-door.png" alt="Homepage">
+                    <img src="../../public/img/house-black-silhouette-without-door.png" alt="Homepage">
                     <p>homepage</p>
                 </div>
                 <div class="navbar-item">
-                    <img src="img/video-camera.png" alt="Movies">
+                    <img src="../../public/img/video-camera.png" alt="Movies">
                     <p>movies</p>
                 </div>
                 <div class="navbar-item">
-                    <img src="img/information-button.png" alt="Information">
+                    <img src="../../public/img/information-button.png" alt="Information">
                     <p>information</p>
                 </div>
             </div>
             <div class="userbar">
                 <div class="userbar-item">
                     <p>login</p>
-                    <img src="img/man-user(2).png" alt="userpage">
+                    <img src="../../public/img/man-user.png" alt="userpage">
                 </div>
             </div>
         </div>
