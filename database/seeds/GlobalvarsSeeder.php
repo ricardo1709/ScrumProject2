@@ -13,9 +13,15 @@ class GlobalvarsSeeder extends Seeder
     {
         $vars = [
             [
-                'id' => 0,
+                'id' => 1,
                 'keyname' => 'loveseat',
                 'value' => 1.1
+            ],
+            
+            [
+                'id' => 2,
+                'keyname' => 'seat',
+                'value' => 8.0
             ]
         ];
 
