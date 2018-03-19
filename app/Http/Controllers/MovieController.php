@@ -16,7 +16,13 @@ class MovieController extends Controller
 {
     public function index()
     {
-        $movies = Movie::orderBy('created_at','desc')->paginate(10);
+        // $movies = Movie::orderBy('created_at','desc')->paginate(10);
+        $movies = DB::table('movies')
+            ->join('plannings', 'movies.movieId', '=', 'plannings.movieId')
+            ->select('movies.movieId', 'movieTitle', 'movieDescription', 'roomId', 'time')
+            ->orderBy('time', 'asc')
+            ->get();
+
         return view('overview', compact('movies'));
     }
 
