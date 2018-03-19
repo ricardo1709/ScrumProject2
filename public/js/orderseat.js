@@ -209,7 +209,7 @@ function Order() {
 		//POST NAAR LARAVEL?
 		var locurl = document.getElementById("paylocation").innerHTML;
 
-		FixAjax();
+		//FixAjax();
 		var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
 		$.ajax({
