@@ -39,6 +39,8 @@ Route::group(['middleware'=>['auth']], function (){
     Route::get('/barcodes', 'BarcodeScannerController@index');
     // Route::get('/pay', 'PayController@store')->name('pay');
 
+    Route::get('autocomplete-ajax',array('as'=>'autocomplete.ajax','uses'=>'MovieController@ajaxData'));
+
     Route::group(['middleware' => ['collaborator'], 'prefix' => '/admin'], function (){
         // localhost:8000/admin/
 
@@ -51,6 +53,7 @@ Route::group(['middleware'=>['auth']], function (){
         Route::group(['middleware' => ['collaborator:3']], function(){
         	Route::get('/movieupdate', 'MovieController@movieAdd');
             Route::post('/movieupdate', 'MovieController@store');
+
         });
 
     });

@@ -107,7 +107,7 @@ class MovieController extends Controller
 	    	//no movie found
 			$noMovieError = "invalid movie title";
 	    }
-        return view('Admin/addMovie', ['noMovieError' => $noMovieError]);
+        return view('addMovie', ['noMovieError' => $noMovieError]);
     }
 
     public function show($id)
@@ -144,7 +144,16 @@ class MovieController extends Controller
     public function movieAdd(){
     	$noMovieError = "";
 
-        return view('Admin/addMovie', ['noMovieError' => $noMovieError]);
+        return view('addMovie', ['noMovieError' => $noMovieError]);
     }
 
+    public function ajaxData(Request $request){
+
+        $query = $request->get('query','');        
+
+        $posts = Post::where('name','LIKE','%'.$query.'%')->get();        
+
+        return response()->json($posts);
+	}
+	
 }
