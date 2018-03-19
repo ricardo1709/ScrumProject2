@@ -18,7 +18,7 @@ class PlanningController extends Controller
 
     public function create()
     { 
-        
+        return view('planning.blade.php');
     }
 
     /**
