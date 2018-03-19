@@ -1,5 +1,6 @@
-@include('layouts.app')
+@extends('layouts.app')
 
+@section('content')
 <div class="container">
 
     {{-- This is the radiobutton selection part --}}
@@ -28,11 +29,16 @@
 
     {{--Ends here!--}}
 </div>
+@stop
 
+@section('page-script')
 {{-- This script submits after a radio button gets selected --}}
 <script>
-    $('input[name=genre]').change(function(){
-        $('form').submit();
+    $(document).ready(function() {
+        $('input[name=genre]').change(function(){
+            $('form').submit();
 
+        });
     });
 </script>
+@stop

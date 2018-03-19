@@ -1,0 +1,51 @@
+%!Adobe-FontList 1.19
+%Locale:0x413
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:Helvetica-Black
+FamilyName:Helvetica Black
+StyleName:Regular
+FullName:Helvetica Black
+MenuName:Helvetica Black
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:C:\Users\Matthijs\Desktop\--\ScrumProject2\docs\Larafilm registratiepagina\Document fonts\Helvetica Black.ttf
+DataFormat:sfntData
+hasSVG:no
+VariableFontType:NonVariableFont
+FileLength:41540
+FileModTime:1521201037
+WeightClass:400
+WidthClass:5
+AngleClass:0
+NameArray:0,Mac,4,Helvetica Black
+NameArray:0,Win,1,Helvetica Black
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:HelveticaNeue-Medium
+FamilyName:Helvetica Neue
+StyleName:Medium
+FullName:Helvetica Neue Medium
+MenuName:Helvetica Neue
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:C:\Users\Matthijs\Desktop\--\ScrumProject2\docs\Larafilm registratiepagina\Document fonts\HelveticaNeue-Medium_0.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+hasSVG:no
+VariableFontType:NonVariableFont
+FileLength:268612
+FileModTime:1521201037
+WeightClass:500
+WidthClass:5
+AngleClass:0
+NameArray:0,Mac,4,Helvetica Neue Medium
+NameArray:0,Win,1,Helvetica Neue
+%EndFont
+

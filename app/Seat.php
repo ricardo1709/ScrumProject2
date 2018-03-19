@@ -10,5 +10,11 @@ class Seat extends Model
     {
         return $this->hasOne(\App\Room::class, 'roomId', 'roomId');
     }
+    
+    public function reserve(bool $value)
+    {
+        $this->isGereserveerd = $value;
+        $this->save();
+    }
 
 }

@@ -38,6 +38,8 @@ class MovieController extends Controller
 
 		$movieGenres = [];
 
+		$cleanGenres = [];
+
 		$finishGenres = [];
 
 		$movies = Movie::get();
