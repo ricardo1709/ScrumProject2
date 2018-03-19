@@ -35,6 +35,8 @@ Route::group(['middleware'=>['auth']], function (){
     Route::get('/bestellen', 'SeatController@index')->name('order');
 
     Route::post('/pay', 'PayController@store')->name('pay');
+	
+	Route::get('/paysuccess', 'PayController@complete')->name('paysuccess');
     // Route::get('/pay', 'PayController@store')->name('pay');
 
     Route::group(['middleware' => ['collaborator'], 'prefix' => '/admin'], function (){
@@ -45,6 +47,8 @@ Route::group(['middleware'=>['auth']], function (){
         Route::post('/movies/{movie}/edit', 'MovieController@update');
         Route::get('/ticket/create', 'TicketController@create');
         Route::post('/ticket/create', 'TicketController@store');
+		
+		Route::get('/paysuccessemployee', 'PayController@completeemployee')->name('paysuccessemployee');
 
         Route::group(['middleware' => ['collaborator:3']], function(){
         	Route::get('/movieupdate', 'MovieController@movieAdd');
