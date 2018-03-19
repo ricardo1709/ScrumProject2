@@ -17,4 +17,5 @@ class Transaction extends Model
         return $this->hasMany(\App\Reserve::class, 'transactionId', 'transactionId');
     }
 
+
 }
