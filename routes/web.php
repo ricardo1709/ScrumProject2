@@ -30,17 +30,25 @@ Auth::routes();
 Route::get('/movies', 'MovieController@index');
 Route::get('/movies/{id}', 'MovieController@show');
 
+
+    
 Route::group(['middleware'=>['auth']], function (){
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/bestellen', 'SeatController@index')->name('order');
 
+    Route::get('/tickets', 'TicketController@index');
     Route::post('/pay', 'PayController@store')->name('pay');
+	
+	Route::get('/paysuccess', 'PayController@complete')->name('paysuccess');
+    // Route::get('/pay', 'PayController@store')->name('pay');
 
     Route::get('/barcodes', 'BarcodeScannerController@index');
     Route::post('/barcodes', 'BarcodeScannerController@check');
     
     Route::get('/price', 'changeGlobalsController@index');
     Route::post('/price', 'changeGlobalsController@store');
+
+    Route::get('autocomplete-ajax',array('as'=>'autocomplete.ajax','uses'=>'MovieController@ajaxData'));
 
     Route::group(['middleware' => ['collaborator'], 'prefix' => '/admin'], function (){
         // localhost:8000/admin/
@@ -57,16 +65,20 @@ Route::group(['middleware'=>['auth']], function (){
         Route::get('/planning/create', 'PlanningController@create');
         Route::get('/planning', 'PlanningController@index');
         Route::post('/planning/create', 'PlanningController@store');
+		
+		Route::get('/paysuccessemployee', 'PayController@completeemployee')->name('paysuccessemployee');
 
         Route::group(['middleware' => ['collaborator:3']], function(){
-        	Route::get('/movieupdate', 'MovieController@movieAdd');
+            Route::get('/movieupdate', 'MovieController@movieAdd');
             Route::post('/movieupdate', 'MovieController@store');
+
         });
 
     });
     Route::group(['middleware' => ['ticketowner', 'tickettimeout']], function (){
         Route::get('/ticket/{id}/view', 'TicketController@show');
     });
+
 });
 
 

@@ -71,3 +71,7 @@
 .error{
 	color: red;
 }
+
+#thebutton {
+	display: none;
+}

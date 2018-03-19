@@ -8,9 +8,12 @@ use Dompdf\Dompdf;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Milon\Barcode\DNS1D;
-use App\Seat;
-use App\Reserve;
 use App\Transaction;
+use App\Movie;
+use App\Reserve;
+use App\Planning;
+use Carbon\Carbon;
+use App\Seat;
 use Illuminate\Support\Facades\DB;
 
 class TicketController extends Controller
@@ -18,11 +21,38 @@ class TicketController extends Controller
     public function __construct()
     {
         
-    }
+    }          
+    
 
     public function index()
     {
-        //
+        $userId = Auth::user()->id;
+        $reserves = Reserve::where('userId', $userId)->get();
+
+        $totaldata = [];
+        foreach ($reserves as $reserve){
+           
+            $data = [];
+            $data['ticket'] = Ticket::where('ticketId', '=', $reserve->ticketId)->first();
+           
+            $data['movie'] = Movie::where('movieId', $reserve->movieId)->first();
+
+            $data['planning'] = Planning::where('movieId', $reserve->movieId)->first();
+            
+            $totaldata[] = $data;
+           
+            $begintijd = new Carbon($data['planning']->time);
+            $addMinutes = $data['movie']->speeltijd;
+
+            $date = new Carbon($data['planning']->date);
+
+        }
+        setlocale(LC_TIME, 'Dutch');
+        return view('/ticketoverview', compact('totaldata', 'begintijd', 'addMinutes', 'date'));
+
+
+
+
     }
 
     public function create($allseatids)
