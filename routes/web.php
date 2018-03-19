@@ -30,10 +30,13 @@ Auth::routes();
 Route::get('/movies', 'MovieController@index');
 Route::get('/movies/{id}', 'MovieController@show');
 
+
+    
 Route::group(['middleware'=>['auth']], function (){
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/bestellen', 'SeatController@index')->name('order');
 
+    Route::get('/tickets', 'TicketController@index');
     Route::post('/pay', 'PayController@store')->name('pay');
 
     Route::get('/barcodes', 'BarcodeScannerController@index');
@@ -59,7 +62,7 @@ Route::group(['middleware'=>['auth']], function (){
         Route::post('/planning/create', 'PlanningController@store');
 
         Route::group(['middleware' => ['collaborator:3']], function(){
-        	Route::get('/movieupdate', 'MovieController@movieAdd');
+            Route::get('/movieupdate', 'MovieController@movieAdd');
             Route::post('/movieupdate', 'MovieController@store');
         });
 
@@ -67,6 +70,7 @@ Route::group(['middleware'=>['auth']], function (){
     Route::group(['middleware' => ['ticketowner', 'tickettimeout']], function (){
         Route::get('/ticket/{id}/view', 'TicketController@show');
     });
+
 });
 
 
