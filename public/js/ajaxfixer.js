@@ -5,10 +5,10 @@ function FixAjax() {
     // ... give time for script to load, then type (or see below for non wait option)
     $.noConflict();
 
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-            'X-CSRFToken': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
+	$.ajaxSetup({
+  		headers: {
+    		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+    		'X-CSRFToken': $('meta[name="csrf-token"]').attr('content')
+  		}
+	});
 }

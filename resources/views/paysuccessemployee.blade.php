@@ -17,9 +17,11 @@
                     </div>
                     @endif
 
-                <p>U heeft betaald voor de stoelen:</p>
+                <p>Medewerker heeft betaald voor de stoelen:</p>
                 <ul>
-                    
+                    @foreach ($allseats as $seat)
+                        <li>Stoel: {{ $seat }}</li>
+                    @endforeach
                 </ul>
                 
                     
