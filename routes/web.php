@@ -52,6 +52,9 @@ Route::group(['middleware'=>['auth']], function (){
         Route::post('/movies/{movie}/edit', 'MovieController@update');
         Route::get('/ticket/create', 'TicketController@create');
         Route::post('/ticket/create', 'TicketController@store');
+        Route::get('/planning/create', 'PlanningController@create');
+        Route::get('/planning', 'PlanningController@index');
+        Route::post('/planning/create', 'PlanningController@store');
 
         Route::group(['middleware' => ['collaborator:3']], function(){
         	Route::get('/movieupdate', 'MovieController@movieAdd');
