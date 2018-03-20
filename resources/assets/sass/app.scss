@@ -85,7 +85,7 @@ h1{
   	display: flex;
 	align-items: center;
 	margin-right: 25px;
-	
+
 	img{
 	  width: 14px;
 	  height: 14px;
@@ -101,7 +101,6 @@ h1{
 	}
 }
 
-}
 .navbar-item img{
   width: 14px;
   height: 14px;
@@ -153,6 +152,21 @@ main {
 }
 
 /*-------------------------------Admin Dashboard--------------------------*/
+.navbar-laravel {
+  background-color: #fff;
+  background-color: #0f0f0f;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.navbar-brand {
+  font-family: Helvetica !important;
+  color: #fff !important;
+}
+
+.navbar-brand span {
+  color: #e95a1c !important;
+}
+
 .admin-main {
   display:flex;
   background: #333;
