@@ -16,7 +16,7 @@ class PlanningController extends Controller
 
     public function index()
     {
-        $planning = Planning::query()->where("date", '=', \Carbon\Carbon::now()->toDateString())->get();
+        $planning = Planning::query()->where("time", '=', \Carbon\Carbon::now()->toDateTimeString())->get();
         return view("planning/index")->with("date", \Carbon\Carbon::now());
     }
 
