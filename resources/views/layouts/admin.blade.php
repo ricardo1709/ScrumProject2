@@ -90,7 +90,7 @@
                     <h4>Tickets</h4>
                 </li>
                 <li class="@if(strpos($_SERVER['REQUEST_URI'],'admin/ticket')) dash-active @endif"><a href="/admin/ticket">Overzicht</a></li>
-                <li class="@if(strpos($_SERVER['REQUEST_URI'],'admin/bestellen')) dash-active @endif"><a href="/admin/bestellen">Bestellen</a></li>
+                <li class="@if(strpos($_SERVER['REQUEST_URI'],'/bestellen')) dash-active @endif"><a href="/bestellen">Bestellen</a></li>
                 <li class="@if(strpos($_SERVER['REQUEST_URI'],'barcodes')) dash-active @endif"><a href="/barcodes">Scannen</a></li>
                 <li><a href="">Annuleren</a></li>
             </ul>
