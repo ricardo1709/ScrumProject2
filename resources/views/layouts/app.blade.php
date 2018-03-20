@@ -53,7 +53,8 @@
                                                      document.getElementById('logout-form').submit();">
                             Logout
                         </a>
-                        <img src="{{ URL::asset('img/man-user.png') }}" alt="userpage">
+                        <a class="nav-link" href="/home"><img src="{{ URL::asset('img/man-user.png') }}" alt="userpage"></a>
+
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
                         </form>
