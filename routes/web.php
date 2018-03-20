@@ -58,6 +58,7 @@ Route::group(['middleware'=>['auth']], function (){
         // url for this item below is (localhost:8000/admin/movies/{id}/edit)
         Route::get('/movies/{movie}/edit', 'MovieController@edit');
         Route::post('/movies/{movie}/edit', 'MovieController@update');
+	    Route::get('/bestellen', 'SeatController@employeeOrder')->name('order');
         Route::get('/ticket', 'TicketController@index');
         Route::get('/ticket/create', 'TicketController@create');
         Route::post('/ticket/create', 'TicketController@store');

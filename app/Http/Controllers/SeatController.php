@@ -32,35 +32,31 @@ class SeatController extends Controller
 
         //return $seatArray;
     }
-    public function create()
+
+    public function employeeOrder()
     {
-        //
+	    $rooms = DB::table('rooms')->get();
+
+	    $seatStrings = array();
+	    $loveSeatStrings = array();
+
+	    $seatArray = array();
+	    $loveSeatArray = array();
+
+	    foreach ($rooms as $rm) {
+		    $seatStrings[$rm->roomId] = "repeat(" . ($rm->seats / $rm->rows) . ", 1fr);";
+		    $loveSeatStrings[$rm->roomId] = "repeat(" . ($rm->loverSeats / $rm->loverRow) . ", 1fr);";
+
+		    $seatArray[($rm->roomId)] = DB::table('seats')->where('roomId', ($rm->roomId))->where('isLoveseat', 0)->get()->toArray();
+
+		    $loveSeatArray[($rm->roomId)] = DB::table('seats')->where('roomId', ($rm->roomId))->where('isLoveseat', 1)->get()->toArray();
+	    }
+
+	    return view('admin.order', ['rooms' => $rooms, 'seatStrings' => $seatStrings, 'loveSeatStrings' => $loveSeatStrings, 'seatArray' => $seatArray, 'loveSeatArray' => $loveSeatArray]);
+
+	    //return $seatArray;
     }
 
-    public function store(Request $request)
-    {
-        //
-    }
-
-    public function show(Seat $seat)
-    {
-        //
-    }
-
-    public function edit(Seat $seat)
-    {
-        //
-    }
-
-    public function update(Request $request, Seat $seat)
-    {
-        //
-    }
-
-    public function destroy(Seat $seat)
-    {
-        //
-    }
 
     public function GenerateRandomSeat($totalSeats, $currentSeat)
     {

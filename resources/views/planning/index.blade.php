@@ -1,12 +1,15 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
 
 <div class="container">
 
 	<div class="card">
-		<div class="card-body text-center planning">
+		<div class="card-header">
 			<h2>Film planning</h2>
+		</div>
+		<div class="card-body text-center planning">
+
 			
 			<form action="/admin/planning/create" method="POST">
 			@csrf
