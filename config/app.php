@@ -217,6 +217,7 @@ return [
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
         'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
+        'Carbon' => 'Carbon\Carbon', 
 
         //html forms
         'Form' => Collective\Html\FormFacade::class,

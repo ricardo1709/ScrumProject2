@@ -2,13 +2,443 @@
 // Fonts
 @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
 
+@font-face {
+  font-family: 'Helvetica';
+  src: url('../fonts/Helvetica-Black.woff2') format('woff2'),
+  url('../fonts/Helvetica-Black.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Minion Pro';
+  src: url('../fonts/MinionPro-Regular.woff2') format('woff2'),
+  url('../fonts/MinionPro-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url('../fonts/HelveticaNeue-Medium.woff2') format('woff2'),
+  url('../fonts/HelveticaNeue-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+
+
 // Variables
 @import "variables";
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
-.navbar-laravel {
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+
+p {
+  padding: 0;
+  margin: 0;
+}
+
+/*-------------------------------Navbar--------------------------*/
+.header{
+	background-color: #0F0F0F;
+	display: grid;
+	grid-template-columns: 25% 50% 25%;
+	grid-template-rows: 70px;
+	position: fixed;
+	z-index: 1;
+	width:  100%;
+	
+	&.active{
+		background-color: rgba(15,15,15, 0.5);
+	}
+}
+
+#phonenavbar{
+  display: none;
+  visibility: hidden;
+}
+
+h1{
+	color: white;
+	text-transform: uppercase;
+	font-family: Helvetica;
+	font-size: 22pt;
+	margin: auto 0;
+	margin-left: 15%;
+	
+	span {
+		color: #E95A1C;
+	}
+}
+
+.navbar {
+	display: flex;
+	align-items: center;
+
+	&.active{
+		visibility: visible;
+		display: flex;
+	}
+}
+.navbar-item {
+  	display: flex;
+	align-items: center;
+	margin-right: 25px;
+	
+	img{
+	  width: 14px;
+	  height: 14px;
+	  margin-right: 5px
+	}
+
+	a {
+	  font-family: "Helvetica Neue";
+	  font-weight: medium;
+	  color: white;
+	  font-size: 13pt;
+	  text-transform: capitalize;
+	}
+}
+
+}
+.navbar-item img{
+  width: 14px;
+  height: 14px;
+  margin-right: 5px
+}
+.navbar-item a{
+  font-family: "Helvetica Neue";
+  color: white;
+  font-size: 13pt;
+  text-transform: capitalize;
+}
+.userbar{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-right: 15%;
+}
+
+.userbar-item {
+	display: flex;
+	align-items: center;
+	color: White;
+	text-transform: uppercase;
+	font-family: "Helvetica Neue";
+	font-size: 11pt;
+	text-transform: capitalize;
+	
+	img {
+		width: 14px;
+		height: 14px;
+		margin-left: 5px
+	}
+
+	a {
+		font-family: "Helvetica Neue";
+		color: #ffffff;
+		font-size: 13pt;
+		text-transform: capitalize;
+		text-decoration: none !important;
+	}
+}
+
+/*-------------------------------App--------------------------*/
+
+main {
+  padding-top: 100px !important;
+  min-height: 78vh;
+  
+}
+
+/*-------------------------------Admin Dashboard--------------------------*/
+.admin-main {
+  display:flex;
+  background: #333;
+  
+}
+
+.nav-left {
+	background: url("../img/projector.png") -500px no-repeat;
+	background-size: cover;
+	height: 900px;
+	width: 300px;
+	color: #fff;
+
+	h3 {
+		font-family: "Helvetica Neue";
+		margin-top: 20px;
+		font-size: 20px;
+		color: #ffffff;
+		text-align: center;
+	
+		a {
+			text-decoration: none;
+			color: #ffffff;
+		}
+	
+	}
+
+	h4 {
+		font-family: "Helvetica Neue";
+		color: #c8c8c8;
+		margin-top: 20px;
+		margin-left: 10px;
+	}
+
+	ul {
+		list-style: none;
+		padding-left: 50px;
+	}
+
+	li {
+		margin: 7px 0;
+		padding: 4px 0;
+		
+		>a {
+		color: #ffffff;
+		margin: 20px 25px;
+		text-decoration: none;
+		}
+	}
+}
+
+.main-content {
+  width: 100%;
+  padding: 40px;
+}
+
+.dash-active {
+  background: #e95a1c;
+}
+
+/*-------------------------------footer--------------------------*/
+.footer{
+	background-color: #201E1C;
+	display: flex;
+	flex-direction: column;
+	
+	#totop{
+		border: 1px solid white;
+		background-color: transparent;
+		font-family: "Helvetica Neue";
+		font-size: medium;
+		font-size: 12pt;
+		color: white;
+		padding: 10px 25px;
+		margin: 10px auto;
+		cursor: pointer;
+	}
+}
+
+.footer-links{
+  display: flex;
+  justify-content: space-around;
+  padding: 15px 0px;
+  border-bottom: 1px solid #777777;
+  margin: 0 20%;
+}
+
+.footer-socialmedia{
+	display: flex;
+	justify-content: space-around;
+	margin: 10px 30%;
+	
+	a{
+		background-color: white;
+		width: 40px;
+		height: 40px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border-radius: 20px;
+		
+		img {
+			width: 24px;
+			height: auto;
+		}
+	}
+}
+
+.footer-link{
+  font-family: "Helvetica Neue";
+  font-size: medium;
+  font-size: 12pt;
+  color: #777777;
+  text-decoration: none;
+}
+.footer-slogan{
+  font-family: "Helvetica Black";
+  font-size: 10pt;
+  color: white;
+}
+
+#copyright{
+	color: #777777;
+	font-family: "Helvetica Neue";
+	font-size: 9pt;
+	text-align: center;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	
+	span{
+	  color: #E95A1C;
+	}
+}
+
+
+/*------------------------------- responsive--------------------------*/
+@media(max-width: 1120px)
+{
+  .main-moviepage{
+    grid-template-columns: 100%;
+    grid-auto-rows: auto;
+  }
+  .details{
+    grid-column: span 2;
+  }
+  .cast{
+    grid-column: span 2;
+    order: 2;
+  }
+}
+@media(max-width: 824px)
+{
+  .header{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 40px 30px;
+  }
+  .navbar{
+    grid-column: span 2;
+    order: 2;
+    justify-content: center;
+  }
+}
+
+@media(max-width: 790px)
+{
+  .movieinfo-text{
+    margin: 0 10%;
+  }
+}
+@media(max-width: 610px)
+{
+  .details-important{
+    flex-direction: column;
+    align-items: center;
+  }
+  #details-important-middle{
+    border: transparent;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+  }
+  .footer-links{
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .cast-crew{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .cast-persons img{
+    width: 80%;
+  }
+  .cast-persons{
+    align-items: center;
+  }
+  .footer-socialmedia{
+    margin: 10px 15%;
+  }
+  .movieinfo{
+    grid-column: span 1;
+  }
+  .details-information{
+    margin-left: 10%;
+    margin-top: 10px;
+    margin-bottom: 50px;
+  }
+  .cast-title, .details-title{
+    margin-bottom: 10px;
+  }
+  .details-important div{
+    width: auto;
+  }
+  .banner{
+    height: 300px;
+  }
+}
+
+
+@media(max-width: 432px)
+{
+  .header{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 40px 30px;
+  }
+  .navbar{
+    grid-column: span 2;
+    order: 2;
+    justify-content: center;
+  }
+  #phonenavbar{
+    visibility: visible;
+    display: block;
+    order: 2;
+    grid-column: span 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #phonenavbar button{
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+    font-family: "Helvetica Neue";
+    font-size: 10pt;
+    padding: 5px 20px;
+    margin-bottom: 5px;
+  }
+  .navbar{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    top: 66px;
+    left: calc((100% - 108px)/2);
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    visibility: hidden;
+    display: none;
+  }
+  .navbar .navbar-item{
+    background-color: #201E1C;
+    width: 98px;
+    padding: 5px;
+    margin: 0px;
+  }
+  .navbar .navbar-item p{
+    font-size: 9pt;
+  }
+  h1{
+    font-size: 18pt;
+  }
+  .movieinfo-text{
+    margin: 0 10%;
+  }
+  .banner{
+    height: 250px;
+  }
+}
+@media(max-width: 412px)
+{
+  .details-information{
+    margin-left: 3%;
+  }
 }

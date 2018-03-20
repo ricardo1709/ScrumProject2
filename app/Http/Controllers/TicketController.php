@@ -4,24 +4,70 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Ticket;
+use Dompdf\Dompdf;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Milon\Barcode\DNS1D;
+use App\Transaction;
+use App\Movie;
+use App\Reserve;
+use App\Planning;
+use Carbon\Carbon;
+use App\Seat;
+use Illuminate\Support\Facades\DB;
 
 class TicketController extends Controller
 {
     public function __construct()
     {
         
-    }
+    }          
+    
 
     public function index()
     {
-        //
+        $userId = Auth::user()->id;
+        $reserves = Reserve::where('userId', $userId)->get();
+
+        $totaldata = [];
+        foreach ($reserves as $reserve){
+           
+            $data = [];
+            $data['ticket'] = Ticket::where('ticketId', '=', $reserve->ticketId)->first();
+           
+            $data['movie'] = Movie::where('movieId', $reserve->movieId)->first();
+
+            $data['planning'] = Planning::where('movieId', $reserve->movieId)->first();
+            
+            $totaldata[] = $data;
+           
+            
+            
+
+            
+            $currentTime = Carbon::now();
+        }
+        setlocale(LC_TIME, 'Dutch');
+        return view('/ticketoverview', compact('totaldata', 'begintijd', 'addMinutes', 'date', 'currentTime'));
+
+
+
+
     }
 
-    public function create()
-    {
-       //
+    public function create($allseatids)
+    { 
+        $tickets = array();
+
+        $user = Auth::user();
+          
+        foreach($allseatids as $id)
+        {
+            array_push($tickets, new Ticket);
+        }
+
+        return redirect('/movies');
+
     }
 
     /**
@@ -33,18 +79,48 @@ class TicketController extends Controller
 
     public function store(Request $request)
     {
+        $totalloveseat = 0;
+        $totalseatprice = 0;
+
         $user = Auth::user();
         $movie = $request->get('movie');
-        $seats = $request->get('seats');
+        $seats = $request->get('seats', []); 
+        $loveseatmultiplier = DB::table('globalvars')->where('keyname', 'loveseat')->value('value');
+        $seatprice = DB::table('globalvars')->where('keyname', 'seat')->value('value');
+
+        foreach($seats as $seatid)
+        {
+            $isloveseat = DB::table('seats')->where('seatId', $seatid)->value('isLoveseat');
+ 
+            if($isloveseat == 1)
+            {
+                $totalloveseat += $seatprice * $loveseatmultiplier;
+            }
+            else
+            {
+                $totalseatprice += $seatprice;
+            }
+        }
+
+        $totalprice = $totalloveseat + $totalseatprice;
+        
+        
+        
+
         //$seats = [3,4];
         //$movie = 1;
 
+
+        
+
         $transaction = \App\Transaction::query()->insertGetId(
-          [ 'userId' => $user->id, 'movieId' => $movie, 'payedAmount' => 10.00]
+          [ 'userId' => $user->id, 'movieId' => $movie, 'payedAmount' => $totalprice]
         );
 
         foreach ($seats as $seat)
         {
+            Seat::query()->where('seatId')->first()->reserve(true);
+            
             $ticket = \App\Ticket::query()->insertGetId(
                 [ 'seatId' => $seat, 'movieId' => $movie,
                   'transactionId' => $transaction, 'barcode' => "123456789"]
@@ -57,7 +133,7 @@ class TicketController extends Controller
             );
         }
 
-        //Mail::to($user)->send(new \App\Mail\Ticket($transaction));
+        Mail::to($user)->send(new \App\Mail\Ticket($transaction));
 
         return redirect()->back();
     }
@@ -72,7 +148,8 @@ class TicketController extends Controller
         $ticket = Ticket::where('ticketId', '=', $id)->get()[0];
 
         // Makes a new domPDF instance
-        $pdf = \App::make('dompdf.wrapper');
+        //$pdf = \App::make('dompdf.wrapper');
+        $pdf = new Dompdf();
 
         // Loads HTML into generator, can also use file reference to convert.
         // Can also use view('view reference');
@@ -96,7 +173,11 @@ class TicketController extends Controller
 
     public function destroy($id)
     {
-        //
+        $ticket = Ticket::query()->where('ticketId', '=', $id)->first();
+        Seat::query()->where('seatId', '=', $ticket->seatId)->first()->reserve(false);
+        Reserve::query()->where('ticketId', '=', $id)->delete();
+        $ticket->delete();
+        return view('ticket.ticketcancel', compact('id'));
     }
 
     // This method generates a PDF from an html template
@@ -113,8 +194,8 @@ class TicketController extends Controller
      */
 	public function createPDF()
 	{
-        $pdf = \App::make('dompdf.wrapper');
-
+        //$pdf = \App::make('dompdf.wrapper');
+	    $pdf = new Dompdf();
         // Loads HTML into generator, can also use file reference to convert.
         $pdf->loadHTML($this->loadPDFtemplate("9592954","959292"));
 
@@ -136,7 +217,7 @@ class TicketController extends Controller
 	public function createBarcode($barcode)
 	{
 		// Generates barcode img
-		$imgBarcode = \DNS1D::getBarcodePNG($barcode, "C39");
+		$imgBarcode = DNS1D::getBarcodePNG($barcode, "C39");
 
 		// Returns the template view, with imgBarcode and original barcode value
     	return $imgBarcode;

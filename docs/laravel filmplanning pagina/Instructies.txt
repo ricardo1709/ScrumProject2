@@ -1,0 +1,89 @@
+ADOBE INDESIGN-AFDRUKINSTRUCTIES VOOR SERVICE PROVIDER
+
+NAAM PUBLICATIE: laravel admin template.indd
+
+PAKKETDATUM: 19-3-2018 09:49
+Aanmaakdatum: 19-3-2018
+Wijzigingsdatum: 19-3-2018
+
+CONTACTGEGEVENS
+
+Bedrijfsnaam: 
+Contactpersoon: 
+Adres: 
+
+
+
+
+
+Telefoon: 
+Fax: 
+E-mail: 
+
+SPECIALE INSTRUCTIES EN ANDERE OPMERKINGEN
+
+
+
+
+
+
+Externe plug-ins 0
+Niet-dekkende objecten: Op pagina1
+
+LETTERTYPEN
+3 gebruikte lettertypen; 0 ontbrekend, 0 ingesloten, 0 onvolledig, 0 beveiligd
+
+Lettertypen ingesloten
+- Naam: Helvetica-Black; Type: TrueType, Status: OK
+- Naam: HelveticaNeue-Medium; Type: OpenType Type 1, Status: OK
+- Naam: MinionPro-Regular; Type: OpenType Type 1, Status: OK
+
+
+KLEUREN EN INKTEN
+4 procesinkten; 0 steuninkten
+
+- Naam en type: Proceskleur Cyaan; Hoek: 0,000; Lijnen/inch: 0,000
+- Naam en type: Proceskleur Magenta; Hoek: 0,000; Lijnen/inch: 0,000
+- Naam en type: Proceskleur Geel; Hoek: 0,000; Lijnen/inch: 0,000
+- Naam en type: Proceskleur Zwart; Hoek: 0,000; Lijnen/inch: 0,000
+
+
+KOPPELINGEN EN AFBEELDINGEN
+(Alleen ontbrekende en ingesloten koppelingen)
+Koppelingen en afbeeldingen: 8 gevonden koppelingen; 0 gewijzigd, 0 ontbrekend, 0 Niet toegankelijk
+Afbeeldingen: 0 ingesloten, 1 gebruiken RGB-kleurruimte
+
+
+AFDRUKINSTELLINGEN
+PPD: n.v.t., (Brother HL-L2340D series Printer)
+Afdrukken naar: Printer
+Aantal exemplaren: 1
+Lezer spreads: Nee
+Even/oneven pagina's: Beide
+Pagina's: Alles
+Proef: Nee
+Naast elkaar: Geen
+Schalen: 100%, 100%
+Paginapositie: Linksboven
+Lagen afdrukken: Zichtbare & afdrukbare lagen
+Drukkersmarkeringen: Geen
+Afloopgebied: 0 px, 0 px, 0 px, 0 px
+Kleur: Samengesteld RGB
+Overvulmodus: Geen
+Afbeeldingsgegevens verzenden: Geoptimaliseerde subsampling
+Vervanging OPI/DCS-afbeelding: Nee
+Paginaformaat: Google Pixel/Pixel 2
+Papierafmetingen: 595,276 px x 841,89 px
+Stand: Liggend
+Negatief: Nee
+Spiegelmodus: Uit
+
+
+BESTANDSPAKKETLIJST
+
+1. laravel admin template.indd; type: Adobe InDesign-publicatie; grootte: 1852K
+2. laravel admin template.idml; type: InDesign-opmaakdocument; grootte: 77K
+3. laravel admin template.pdf; type: Adobe Acrobat-document; grootte: 89K
+4. Helvetica Black.ttf; type: Lettertypebestand; grootte: 40K
+5. HelveticaNeue-Medium_0.otf; type: Lettertypebestand; grootte: 262K
+6. MinionPro-Regular.otf; type: Lettertypebestand; grootte: 213K
