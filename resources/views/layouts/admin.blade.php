@@ -75,8 +75,8 @@
                     <h4>Films</h4>
                 </li>
                 <li class="@if(strpos($_SERVER['REQUEST_URI'],'movieupdate')) dash-active @endif"><a href="/admin/movieupdate">Toevoegen</a></li>
-                <li><a href="">Inplannen</a></li>
-                <li><a href="">Planning</a></li>
+                <li class="@if(strpos($_SERVER['REQUEST_URI'],'planning/create')) dash-active @endif"><a href="/admin/planning/create">Inplannen</a></li>
+                <li class="@if(strpos($_SERVER['REQUEST_URI'],'planning')) dash-active @endif"><a href="/admin/planning">Planning</a></li>
             </ul>
             <ul class="list-group list-group-flush">
                 <li>
@@ -89,7 +89,8 @@
                 <li>
                     <h4>Tickets</h4>
                 </li>
-                <li><a href="">Bestellen</a></li>
+                <li class="@if(strpos($_SERVER['REQUEST_URI'],'admin/ticket')) dash-active @endif"><a href="/admin/ticket">Overzicht</a></li>
+                <li class="@if(strpos($_SERVER['REQUEST_URI'],'/bestellen')) dash-active @endif"><a href="/bestellen">Bestellen</a></li>
                 <li class="@if(strpos($_SERVER['REQUEST_URI'],'barcodes')) dash-active @endif"><a href="/barcodes">Scannen</a></li>
                 <li><a href="">Annuleren</a></li>
             </ul>
