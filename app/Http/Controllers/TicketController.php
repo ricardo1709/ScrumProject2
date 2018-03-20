@@ -177,6 +177,7 @@ class TicketController extends Controller
         Seat::query()->where('seatId', '=', $ticket->seatId)->first()->reserve(false);
         Reserve::query()->where('ticketId', '=', $id)->delete();
         $ticket->delete();
+        return view('ticket.ticketcancel', compact('id'));
     }
 
     // This method generates a PDF from an html template
