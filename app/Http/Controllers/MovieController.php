@@ -19,17 +19,23 @@ class MovieController extends Controller
 		// This if statement checks if a genre has been selected and also checks if a radiobutton has been selected
 		// so that when the page refreshes the radiobutton doesn't get unchecked
 		if(!empty($_GET['genre'])) {
-			$movies = Movie::where('genre', $_GET['genre'])
+			$allmovies = Movie::where('genre', $_GET['genre'])
 			               ->orWhere('genre', 'like', '%' . $_GET['genre'] . '%')->get();
 			$radioSelected = $_GET['genre'];
 		} else {
-			$movies = Movie::get();
+			$allmovies = Movie::get();
 			$radioSelected = "All";
 		}
 
-		$movieGenres = $this->getGenres();
+        $movieGenres = $this->getGenres();
+        
+        $movies = DB::table('movies')
+            ->join('plannings', 'movies.movieId', '=', 'plannings.movieId')
+            ->select('movies.movieId', 'movieTitle', 'movieDescription', 'roomId', 'time')
+            ->orderBy('time', 'asc')
+            ->get();
 
-		return view('overview', compact('movies','movieGenres', 'radioSelected'));
+		return view('overview', compact('allmovies','movieGenres', 'radioSelected', 'movies'));
 	}
 
 
@@ -59,6 +65,8 @@ class MovieController extends Controller
 
 			}
 		}
+
+
 
 		// Clears incorrect $movieGenres array
 		unset($movieGenres);
@@ -109,7 +117,7 @@ class MovieController extends Controller
 	    	//no movie found
 			$noMovieError = "invalid movie title";
 	    }
-        return view('Admin/addMovie', ['noMovieError' => $noMovieError]);
+        return view('addMovie', ['noMovieError' => $noMovieError]);
     }
 
     public function show($id)
@@ -146,7 +154,16 @@ class MovieController extends Controller
     public function movieAdd(){
     	$noMovieError = "";
 
-        return view('Admin/addMovie', ['noMovieError' => $noMovieError]);
+        return view('addMovie', ['noMovieError' => $noMovieError]);
     }
 
+    public function ajaxData(Request $request){
+
+        $query = $request->get('query','');        
+
+        $posts = Post::where('name','LIKE','%'.$query.'%')->get();        
+
+        return response()->json($posts);
+	}
+	
 }
