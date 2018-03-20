@@ -5,6 +5,7 @@
 	<h2> add a new movie</h2>
 	<p>Write the title of the movie you want to add.</p>
 	<p>If you want to see the suggestions, click out of the box.</p>
+	<p>The suggestions might take a second to load so be patient.</p>
 	
 	<h3 class="error">
 		@if ($noMovieError == "invalid movie title")
@@ -19,7 +20,8 @@
 	</form>
 
 	<ul id="titles"></ul>
+@endsection
 
+@section('page-script')
 	<script type="text/javascript" src="{{ URL::asset('js/autocomplete.js') }}"></script>
-
-@stop
+@endsection
