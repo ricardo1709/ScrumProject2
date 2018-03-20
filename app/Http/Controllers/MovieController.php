@@ -156,14 +156,5 @@ class MovieController extends Controller
 
         return view('addMovie', ['noMovieError' => $noMovieError]);
     }
-
-    public function ajaxData(Request $request){
-
-        $query = $request->get('query','');        
-
-        $posts = Post::where('name','LIKE','%'.$query.'%')->get();        
-
-        return response()->json($posts);
-	}
 	
 }
