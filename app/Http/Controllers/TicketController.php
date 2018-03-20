@@ -41,14 +41,14 @@ class TicketController extends Controller
             
             $totaldata[] = $data;
            
-            $begintijd = new Carbon($data['planning']->time);
-            $addMinutes = $data['movie']->speeltijd;
+            
+            
 
-            $date = new Carbon($data['planning']->date);
-
+            
+            $currentTime = Carbon::now();
         }
         setlocale(LC_TIME, 'Dutch');
-        return view('/ticketoverview', compact('totaldata', 'begintijd', 'addMinutes', 'date'));
+        return view('/ticketoverview', compact('totaldata', 'begintijd', 'addMinutes', 'date', 'currentTime'));
 
 
 
