@@ -1,9 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<link rel="stylesheet" href="css/style.css">
-<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
-
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -123,8 +120,7 @@
     </div>
 </div>
 </div>
-<script src="js/slider.js"></script>
-<script src="js/orderseat.js"></script>
+
 
 <!-- MODALS -->
 
@@ -220,3 +216,34 @@
   </div>
 </div>
 @endsection
+
+<link rel="stylesheet" href="css/style.css">
+<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+<script src="js/slider.js"></script>
+<script src="js/orderseat.js"></script>
+
+@foreach ($rooms as $room)
+  @if (!empty($seatArray[$room->roomId]))
+    <style>
+      .normalseats{{ $room->roomId }} {
+      display: grid;
+      margin: 0 auto;
+      text-align: center;
+
+      grid-gap: 1%;
+
+      grid-template-columns: {{ $seatStrings[$room->roomId] }};
+      }
+
+      .loverseats{{ $room->roomId }} {
+        display: grid;
+        margin: 0 auto;
+        text-align: center;
+
+        grid-gap: 1%;
+
+        grid-template-columns: {{ $loveSeatStrings[$room->roomId] }};
+      }
+    </style>
+  @endif
+@endforeach
