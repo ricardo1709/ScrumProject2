@@ -41,41 +41,65 @@ p {
 
 /*-------------------------------Navbar--------------------------*/
 .header{
-  background-color: #0F0F0F;
-  display: grid;
-  grid-template-columns: 25% 50% 25%;
-  grid-template-rows: 70px;
-  position: fixed;
-  width:  100%;
+	background-color: #0F0F0F;
+	display: grid;
+	grid-template-columns: 25% 50% 25%;
+	grid-template-rows: 70px;
+	position: fixed;
+	z-index: 1;
+	width:  100%;
+	
+	&.active{
+		background-color: rgba(15,15,15, 0.5);
+	}
 }
-.header.active{
-  background-color: rgba(15,15,15, 0.5);
-}
+
 #phonenavbar{
   display: none;
   visibility: hidden;
 }
 
 h1{
-  color: white;
-  text-transform: uppercase;
-  font-family: Helvetica;
-  font-size: 22pt;
-  margin: auto 0;
-  margin-left: 15%;
+	color: white;
+	text-transform: uppercase;
+	font-family: Helvetica;
+	font-size: 22pt;
+	margin: auto 0;
+	margin-left: 15%;
+	
+	span {
+		color: #E95A1C;
+	}
+}
 
+.navbar {
+	display: flex;
+	align-items: center;
+
+	&.active{
+		visibility: visible;
+		display: flex;
+	}
 }
-h1 span{
-  color: #E95A1C;
+.navbar-item {
+  	display: flex;
+	align-items: center;
+	margin-right: 25px;
+	
+	img{
+	  width: 14px;
+	  height: 14px;
+	  margin-right: 5px
+	}
+
+	a {
+	  font-family: "Helvetica Neue";
+	  font-weight: medium;
+	  color: white;
+	  font-size: 13pt;
+	  text-transform: capitalize;
+	}
 }
-.navbar{
-  display: flex;
-  align-items: center;
-}
-.navbar-item{
-  display: flex;
-  align-items: center;
-  margin-right: 25px;
 
 }
 .navbar-item img{
@@ -85,7 +109,6 @@ h1 span{
 }
 .navbar-item a{
   font-family: "Helvetica Neue";
-  font-weight: medium;
   color: white;
   font-size: 13pt;
   text-transform: capitalize;
@@ -96,32 +119,29 @@ h1 span{
   justify-content: flex-end;
   margin-right: 15%;
 }
-.userbar-item{
-  display: flex;
-  align-items: center;
-  color: White;
-  text-transform: uppercase;
-  font-family: "Helvetica Neue";
-  font-size: 11pt;
-  text-transform: capitalize;
-}
-.userbar-item img{
-  width: 14px;
-  height: 14px;
-  margin-left: 5px
-}
 
-.userbar-item a {
-  font-family: "Helvetica Neue";
-  color: #ffffff;
-  font-size: 13pt;
-  text-transform: capitalize;
-  text-decoration: none !important;
-}
+.userbar-item {
+	display: flex;
+	align-items: center;
+	color: White;
+	text-transform: uppercase;
+	font-family: "Helvetica Neue";
+	font-size: 11pt;
+	text-transform: capitalize;
+	
+	img {
+		width: 14px;
+		height: 14px;
+		margin-left: 5px
+	}
 
-.navbar.active{
-  visibility: visible;
-  display: flex;
+	a {
+		font-family: "Helvetica Neue";
+		color: #ffffff;
+		font-size: 13pt;
+		text-transform: capitalize;
+		text-decoration: none !important;
+	}
 }
 
 /*-------------------------------App--------------------------*/
@@ -129,57 +149,59 @@ h1 span{
 main {
   padding-top: 100px !important;
   min-height: 78vh;
+  
 }
 
 /*-------------------------------Admin Dashboard--------------------------*/
 .admin-main {
   display:flex;
   background: #333;
+  
 }
 
 .nav-left {
-  background: url("../img/projector.png") -500px no-repeat;
-  background-size: cover;
-  height: 900px;
-  width: 300px;
-  color: #fff;
-}
+	background: url("../img/projector.png") -500px no-repeat;
+	background-size: cover;
+	height: 900px;
+	width: 300px;
+	color: #fff;
 
-.nav-left h3 {
-  font-family: "Helvetica Neue";
-  margin-top: 20px;
-  font-size: 20px;
-  color: #ffffff;
-  text-align: center;
-}
+	h3 {
+		font-family: "Helvetica Neue";
+		margin-top: 20px;
+		font-size: 20px;
+		color: #ffffff;
+		text-align: center;
+	
+		a {
+			text-decoration: none;
+			color: #ffffff;
+		}
+	
+	}
 
-.nav-left h3 a  {
-  text-decoration: none;
-  color: #ffffff;
-}
+	h4 {
+		font-family: "Helvetica Neue";
+		color: #c8c8c8;
+		margin-top: 20px;
+		margin-left: 10px;
+	}
 
+	ul {
+		list-style: none;
+		padding-left: 50px;
+	}
 
-.nav-left h4 {
-  font-family: "Helvetica Neue";
-  color: #c8c8c8;
-  margin-top: 20px;
-  margin-left: 10px;
-}
-
-.nav-left ul {
-  list-style: none;
-  padding-left: 50px;
-}
-
-.nav-left li {
-  margin: 7px 0;
-  padding: 4px 0;
-}
-
-.nav-left li>a {
-  color: #ffffff;
-  margin: 20px 25px;
-  text-decoration: none;
+	li {
+		margin: 7px 0;
+		padding: 4px 0;
+		
+		>a {
+		color: #ffffff;
+		margin: 20px 25px;
+		text-decoration: none;
+		}
+	}
 }
 
 .main-content {
@@ -193,11 +215,23 @@ main {
 
 /*-------------------------------footer--------------------------*/
 .footer{
-  background-color: #201E1C;
-  display: flex;
-  flex-direction: column;
-
+	background-color: #201E1C;
+	display: flex;
+	flex-direction: column;
+	
+	#totop{
+		border: 1px solid white;
+		background-color: transparent;
+		font-family: "Helvetica Neue";
+		font-size: medium;
+		font-size: 12pt;
+		color: white;
+		padding: 10px 25px;
+		margin: 10px auto;
+		cursor: pointer;
+	}
 }
+
 .footer-links{
   display: flex;
   justify-content: space-around;
@@ -205,26 +239,28 @@ main {
   border-bottom: 1px solid #777777;
   margin: 0 20%;
 }
+
 .footer-socialmedia{
-  display: flex;
-  justify-content: space-around;
-  margin: 10px 30%;
+	display: flex;
+	justify-content: space-around;
+	margin: 10px 30%;
+	
+	a{
+		background-color: white;
+		width: 40px;
+		height: 40px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border-radius: 20px;
+		
+		img {
+			width: 24px;
+			height: auto;
+		}
+	}
 }
 
-.footer-socialmedia a img {
-  width: 24px;
-  height: auto;
-}
-.footer-socialmedia a{
-  background-color: white;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 20px;
-
-}
 .footer-link{
   font-family: "Helvetica Neue";
   font-size: medium;
@@ -237,27 +273,18 @@ main {
   font-size: 10pt;
   color: white;
 }
-.footer #totop{
-  border: 1px solid white;
-  background-color: transparent;
-  font-family: "Helvetica Neue";
-  font-size: medium;
-  font-size: 12pt;
-  color: white;
-  padding: 10px 25px;
-  margin: 10px auto;
-  cursor: pointer;
-}
+
 #copyright{
-  color: #777777;
-  font-family: "Helvetica Neue";
-  font-size: 9pt;
-  text-align: center;
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
-#copyright span{
-  color: #E95A1C;
+	color: #777777;
+	font-family: "Helvetica Neue";
+	font-size: 9pt;
+	text-align: center;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	
+	span{
+	  color: #E95A1C;
+	}
 }
 
 

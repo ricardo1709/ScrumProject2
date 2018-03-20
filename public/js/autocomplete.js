@@ -1,6 +1,5 @@
 var url = "http://www.omdbapi.com/?i=tt3896198&apikey=11afb677&s=";
 var results = [];
-
 $("#movieName").change(function() {
 	var title = document.getElementById("movieName").value;
 	var preppedUrl = url + title;
