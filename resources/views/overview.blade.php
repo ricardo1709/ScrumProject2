@@ -16,7 +16,7 @@
 
 
     {{--This part can be used for the LaraFilm Project--}}
-    @foreach($movies as  $movie)
+    @foreach($allmovies as  $movie)
         <div class="Movie">
             
             <div>

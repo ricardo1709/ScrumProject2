@@ -101,6 +101,18 @@ h1{
 	}
 }
 
+}
+.navbar-item img{
+  width: 14px;
+  height: 14px;
+  margin-right: 5px
+}
+.navbar-item a{
+  font-family: "Helvetica Neue";
+  color: white;
+  font-size: 13pt;
+  text-transform: capitalize;
+}
 .userbar{
   display: flex;
   align-items: center;
