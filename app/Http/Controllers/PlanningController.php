@@ -34,13 +34,13 @@ class PlanningController extends Controller
 
     public function store(Request $request)
     {
-        $date = $request->get('date');
         $time = $request->get('time');
         $movie = $request->get('movie');
         $room = $request->get('room');
         
-        $movie = Movie::query()->where('movieTitle', '=', $movie)->first(['movieId'])['movieId'];
-        Planning::query()->insert(['movieId'=> $movie, 'time'=> $time, 'date' => $date, 'roomId' => $room]);
+        //$movie = Movie::query()->where('movieTitle', '=', $movie)->first(['movieId'])['movieId'];
+        Planning::query()->insert(['movieId'=> $movie, 'time'=> $time, 'roomId' => $room]);
+        return redirect('/movies');
     }
 
     /**
