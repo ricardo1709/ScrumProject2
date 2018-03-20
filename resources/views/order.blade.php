@@ -25,7 +25,7 @@
                                 <span onclick="plusDivs(1)" class="fas fa-chevron-right gc"></span>
                             </div>
 
-                            <style>
+<!--                             <style>
                             .normalseats{{ $room->roomId }} {
                                 display: grid;
                                 margin: 0 auto;
@@ -45,7 +45,7 @@
 
                                 grid-template-columns: {{ $loveSeatStrings[$room->roomId] }};
                             }
-                        </style>
+                        </style> -->
 
                         <div class="stoelen">
                             <div class="normalseats{{ $room->roomId }}">
