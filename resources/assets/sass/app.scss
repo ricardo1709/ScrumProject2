@@ -148,7 +148,7 @@ h1{
 main {
   padding-top: 70px !important;
   min-height: 78vh;
-  
+  background: #414141;
 }
 
 /*-------------------------------Admin Dashboard--------------------------*/
@@ -225,6 +225,91 @@ main {
 
 .dash-active {
   background: #e95a1c;
+}
+
+
+/*-------------------------------Home Page--------------------------*/
+.movieObject{
+  margin: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+
+  img{
+    height: 400px;
+    width: 300px;
+  }
+
+  .movieOverlay {
+    display: none;
+    height: 400px;
+    width: 300px;
+    margin-top: -400px;
+    position: absolute;
+    background-color: rgba(255,255,255, 0.7);
+  }
+
+  .overlayContent {
+    height: 400px;
+    width: 300px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    h3 {
+      margin-top: 80px;
+      font-family: "Helvetica";
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    a {
+      margin-top: 50px;
+      padding: 7px 15px;
+      font-family: "Helvetica";
+      font-size: 18px;
+      text-transform: uppercase;
+      color: #000;
+      text-decoration: none;
+      border: solid 3px #000;
+    }
+  }
+}
+
+#filterBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  button {
+    margin-left: 30px;
+  }
+
+  form {
+    display: flex;
+  }
+
+  .dateBtn {
+    margin: 0 1.5vw;
+  }
+  
+  .dateRadio {
+    // display: none;
+  }
+
+  label {
+    margin: 0;
+  }
+}
+
+.dropdown-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  label {
+    padding-right: 60px;
+  }
 }
 
 /*-------------------------------footer--------------------------*/

@@ -14,6 +14,7 @@ class MovieController extends Controller
 	{
 		// This if statement checks if a genre has been selected and also checks if a radiobutton has been selected
 		// so that when the page refreshes the radiobutton doesn't get unchecked
+
 		if(!empty($_GET['genre'])) {
 			$movies = Movie::join('plannings', 'movies.movieId', '=', 'plannings.movieId')
                 ->where('genre', $_GET['genre'])
@@ -29,9 +30,21 @@ class MovieController extends Controller
             $radioSelected = "All";
 		}
 
+        $date = ['day' => date('d'), 'month' => date('m'), 'year' => date('y')];
+
         $movieGenres = $this->getGenres();
 
-		return view('overview', compact('allmovies','movieGenres', 'radioSelected', 'movies'));
+        if(!empty($_GET['date'])){
+            if($_GET['date'] != date('d')){
+                $dateSelected = $_GET['date'];
+            } else {
+                $dateSelected = date('d');
+            }
+        } else {
+            $dateSelected = date('d');
+        }
+
+		return view('overview', compact('movieGenres', 'radioSelected', 'movies', 'date', 'dateSelected'));
 	}
 
 
@@ -108,7 +121,7 @@ class MovieController extends Controller
         try
 		{
 	        DB::table('movies')->insert(
-	            ['movieTitle' => $movies->Title, 'movieDescription' => $movies->Plot, 'moviePrice' => 0, 'speeltijd' => $movies->Runtime, 'genre' => $movies->Genre]
+	            ['movieTitle' => $movies->Title, 'movieDescription' => $movies->Plot, 'moviePrice' => 0, 'speeltijd' => $movies->Runtime, 'genre' => $movies->Genre, 'poster' => $movies->Poster]
 	        );
 	    }
 	    catch(\Exception $e){

@@ -1,36 +1,66 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div id="home" class="container-fluid">
 
-    {{-- This is the radiobutton selection part --}}
-    <form action="{{ action('MovieController@index') }}" method="GET">
-        <label for="genre">All</label>
-        <input type="radio" name="genre" value="" @if($radioSelected == "All") checked @endif>
-        @foreach($movieGenres as $movieGenre)
-            <label for="genre">{{ $movieGenre }}</label>
-            <input type="radio" name="genre" value="{{ $movieGenre }}" @if($radioSelected == $movieGenre) checked @endif>
-        @endforeach
-    </form>
+    <div id="filterBar">
+        <div id="dateFilter">
+            <form action="{{ action('MovieController@index') }}" method="GET">
+            @for($i = 0; $i < 14; $i++)
+                <div class="dateBtn">
+                    <label for="date">{{ $date['day'] }}</label>
+                    <input class="dateRadio" id="date" type="radio" name="date" value="{{ $date['day'] }}" @if($dateSelected == $date['day']) checked @else @endif>
+                </div>
+                <?php
+                if($date['day'] > 30){
+                    $date['month']++;
+                    $date['day'] = 1;
+                } else {
+                    $date['day']++;
+                }
+                ?>
+            @endfor
+            </form>
+        </div>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown button
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <form action="{{ action('MovieController@index') }}" method="GET">
+                    <label for="genre" class="dropdown-item">All
+                        <input type="radio" name="genre" id="genreAll" @if($radioSelected == "All") checked @endif>
+                    </label>
 
-
-
-    {{--This part can be used for the LaraFilm Project--}}
-    @foreach($movies as  $movie)
-        <div class="Movie">
-            
-            <div>
-                <h3><a href="{{ action('MovieController@show', $movie->movieId ) }}">{{$movie->movieTitle}}</a></h3>
-                <p>{{$movie->movieDescription}}</p>
-                <p>Zaal: {{$movie->roomId}}</p>
-                <p>Datum en tijdstip:</p>
-                <p>{{$movie->time}}</p>
+                    @foreach($movieGenres as $movieGenre)
+                    <label for="{{ $movieGenre }}" class="dropdown-item">
+                            {{ $movieGenre }}
+                            <input type="radio" id="{{ $movieGenre }}" name="genre" value="{{ $movieGenre }}" @if($radioSelected == $movieGenre) checked @endif>
+                    </label>
+                    @endforeach
+                </form>
             </div>
         </div>
-    @endforeach
 
+    </div>
 
-    {{--Ends here!--}}
+    <div id="movies" style="display: flex; flex-wrap: wrap;">
+        @foreach($movies as  $movie)
+            <div class="movieObject">
+                <div>
+                    <img onClick="showOverlay({{ $movie->movieId }})" src="{{ $movie->poster }}" alt="Movie Post">
+                </div>
+
+                <div onClick="showOverlay({{ $movie->movieId }})" class="movieOverlay" id="movieOverlay{{ $movie->movieId }}">
+                    <div class="overlayContent">
+                        <h3>{{ $movie->movieTitle }}</h3>
+                        <a href="/movies/{{ $movie->movieId }}">Naar de Film</a>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
+
 </div>
 @stop
 
@@ -43,6 +73,23 @@
 
         });
     });
+
+    $(document).ready(function() {
+        $('input[name=date]').change(function(){
+            $('form').submit();
+
+        });
+    });
+
+    function showOverlay(id) {
+        var element = document.getElementById("movieOverlay" + id);
+
+        if(element.style.display == "block") {
+            element.style.display = "none";
+        } else {
+            element.style.display = "block";
+        }
+    }
 </script>
 @stop
 
