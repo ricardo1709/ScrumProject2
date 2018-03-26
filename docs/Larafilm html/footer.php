@@ -6,11 +6,11 @@
                 <a href="" class="footer-link">Adverteren</a>
             </navbar>
             <div class="footer-socialmedia">
-                <a href=""><img src="img/instagram.png" alt=""></a>
-                <a href=""><img src="img/twitter.png" alt=""></a>
-                <a href=""><img src="img/facebook.png" alt=""></a>
-                <a href=""><img src="img/whatsapp.png" alt=""></a>
-                <a href=""><img src="img/youtube.png" alt=""></a>
+                <a href=""><img src="../../public/img/instagram.png" alt=""></a>
+                <a href=""><img src="../../public/img/twitter.png" alt=""></a>
+                <a href=""><img src="../../public/img/facebook.png" alt=""></a>
+                <a href=""><img src="../../public/img/whatsapp.png" alt=""></a>
+                <a href=""><img src="../../public/img/youtube.png" alt=""></a>
             </div>
             <button id="totop">Naar Boven</button>
             <p id="copyright">© 2018 <span>Larafilm</span></p>

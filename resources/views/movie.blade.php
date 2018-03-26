@@ -1,9 +1,10 @@
-@include('layouts.app')
+@extends('layouts.app')
 
+@section('content')
 <div class="banner">
     <div class="container-fluid">
         <div class="row">
-            <img src="//placehold.it/1624x500" class="img-responsive">
+            <img src="//placehold.it/1624x500" style="width: 100%;">
         </div>
     </div>
 </div>
@@ -21,7 +22,7 @@
 
 <div class="reservebutton mt-5 mb-5">
     @if($loggedIn == true)
-        <button type="button" class="btn btn-primary btn-lg btn-block">Reserveer</button>
+        <a href="/bestellen" role="button" class="btn btn-primary btn-lg btn-block">Reserveer</a>
     @else
         <div class="text-center">
             <button type="button" class="btn btn-secondary disabled btn-lg btn-block">Je moet ingelogged zijn om deze film te kunnen reserveren!</button>
@@ -94,4 +95,4 @@
         
     </div>
 </div>
-
+@stop

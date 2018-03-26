@@ -4,11 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Movie;
 use Illuminate\Http\Request;
-//use App\Product;
-//use App\Http\Requests;
 use GuzzleHttp\Client;
-//use GuzzleHttp\Message\Request;
-//use GuzzleHttp\Message\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,17 +15,23 @@ class MovieController extends Controller
 		// This if statement checks if a genre has been selected and also checks if a radiobutton has been selected
 		// so that when the page refreshes the radiobutton doesn't get unchecked
 		if(!empty($_GET['genre'])) {
-			$movies = Movie::where('genre', $_GET['genre'])
-			               ->orWhere('genre', 'like', '%' . $_GET['genre'] . '%')->get();
+			$movies = Movie::join('plannings', 'movies.movieId', '=', 'plannings.movieId')
+                ->where('genre', $_GET['genre'])
+                ->orWhere('genre', 'like', '%' . $_GET['genre'] . '%')
+                ->get();
+
 			$radioSelected = $_GET['genre'];
 		} else {
-			$movies = Movie::get();
-			$radioSelected = "All";
+            $movies = Movie::join('plannings', 'movies.movieId', '=', 'plannings.movieId')
+                ->orderBy('time', 'asc')
+                ->get();
+
+            $radioSelected = "All";
 		}
 
-		$movieGenres = $this->getGenres();
+        $movieGenres = $this->getGenres();
 
-		return view('overview', compact('movies','movieGenres', 'radioSelected'));
+		return view('overview', compact('allmovies','movieGenres', 'radioSelected', 'movies'));
 	}
 
 
@@ -42,7 +44,9 @@ class MovieController extends Controller
 
 		$finishGenres = [];
 
-		$movies = Movie::get();
+		$movies = Movie::join('plannings', 'movies.movieId', '=', 'plannings.movieId')
+            ->orderBy('time', 'asc')
+            ->get();
 
 		// Generates an array with movie genres
 		foreach($movies as $movie) {
@@ -59,6 +63,8 @@ class MovieController extends Controller
 
 			}
 		}
+
+
 
 		// Clears incorrect $movieGenres array
 		unset($movieGenres);
@@ -109,7 +115,7 @@ class MovieController extends Controller
 	    	//no movie found
 			$noMovieError = "invalid movie title";
 	    }
-        return view('Admin/addMovie', ['noMovieError' => $noMovieError]);
+        return view('addMovie', ['noMovieError' => $noMovieError]);
     }
 
     public function show($id)
@@ -146,7 +152,7 @@ class MovieController extends Controller
     public function movieAdd(){
     	$noMovieError = "";
 
-        return view('Admin/addMovie', ['noMovieError' => $noMovieError]);
+        return view('addMovie', ['noMovieError' => $noMovieError]);
     }
-
+	
 }

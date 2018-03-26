@@ -11,7 +11,7 @@
 
 .zaal {
 	width: 100%;
-	height: 100%;
+/*	height: 100%;*/
 }
 
 .zaalheader {
@@ -70,4 +70,8 @@
 
 .error{
 	color: red;
+}
+
+#thebutton {
+	display: none;
 }
