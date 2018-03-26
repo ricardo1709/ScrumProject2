@@ -24,7 +24,7 @@
 
 <div class="reservebutton mt-5 mb-5">
     @if($loggedIn == true)
-        <a href="/bestellen" role="button" class="btn btn-primary btn-lg btn-block">Reserveer</a>
+        <a href="{{ route('order', $id) }}" role="button" class="btn btn-primary btn-lg btn-block">Reserveer</a>
     @else
         <div class="text-center">
             <button type="button" class="btn btn-secondary disabled btn-lg btn-block">Je moet ingelogged zijn om deze film te kunnen reserveren!</button>

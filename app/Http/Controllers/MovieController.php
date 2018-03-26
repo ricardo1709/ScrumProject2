@@ -129,7 +129,7 @@ class MovieController extends Controller
         $genre = $movieInfo->genre; 
         
         //dd($genre);
-        return view('movie', compact('loggedIn', 'title', 'desc', 'runtime', 'genre'));
+        return view('movie', compact('loggedIn', 'title', 'desc', 'runtime', 'genre', 'id'));
     }
 
     function edit($id)
