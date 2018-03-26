@@ -48,8 +48,6 @@ Route::group(['middleware'=>['auth']], function (){
     Route::get('/price', 'changeGlobalsController@index');
     Route::post('/price', 'changeGlobalsController@store');
 
-    Route::get('autocomplete-ajax',array('as'=>'autocomplete.ajax','uses'=>'MovieController@ajaxData'));
-
     Route::group(['middleware' => ['collaborator'], 'prefix' => '/admin'], function (){
         // localhost:8000/admin/
 
@@ -60,6 +58,7 @@ Route::group(['middleware'=>['auth']], function (){
         // url for this item below is (localhost:8000/admin/movies/{id}/edit)
         Route::get('/movies/{movie}/edit', 'MovieController@edit');
         Route::post('/movies/{movie}/edit', 'MovieController@update');
+        Route::get('/ticket', 'TicketController@index');
         Route::get('/ticket/create', 'TicketController@create');
         Route::post('/ticket/create', 'TicketController@store');
         Route::get('/planning/create', 'PlanningController@create');
