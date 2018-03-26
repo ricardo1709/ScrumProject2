@@ -65,6 +65,8 @@ Route::group(['middleware'=>['auth']], function (){
         Route::get('/planning/create', 'PlanningController@create');
         Route::get('/planning', 'PlanningController@index');
         Route::post('/planning/create', 'PlanningController@store');
+
+        Route::get('/selectseats', 'SeatController@showAll');
 		
 		Route::get('/paysuccessemployee', 'PayController@completeemployee')->name('paysuccessemployee');
 
