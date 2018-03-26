@@ -17,6 +17,7 @@
 
     <!-- JAVASCRIPT -->
     <script src="{{ URL::asset('js/jquery-3.3.1.min.js') }}"></script>
+    <script src="{{ URL::asset('js/cookie.js') }}"></script>
 
 </head>
 <body>
@@ -64,6 +65,23 @@
         </div>
 
         <main class="">
+            <div id="cookieModal" class="modal fade" role="dialog">
+              <div class="modal-dialog">
+
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Cookies!</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+                  <div class="modal-body">
+                    <p>Wij gebruiken cookies op deze website, als je zou willen weten waarom cookies bestaan of waarom wij ze gebruiken kan een korte google search je veel informatie bieden.</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Accepteer</button>
+                  </div>
+                </div>
+              </div>
+            </div>
             @yield('content')
         </main>
     </div>
