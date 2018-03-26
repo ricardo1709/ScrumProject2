@@ -45,6 +45,10 @@ Route::group(['middleware'=>['auth']], function (){
     Route::get('/barcodes', 'BarcodeScannerController@index');
     Route::post('/barcodes', 'BarcodeScannerController@check');
     
+    Route::get('/medewerker', 'medewerkerController@index');
+    Route::post('/medewerker', 'medewerkerController@store');
+    Route::get('medewerker/{id}/delete', 'medewerkerController@delete');
+    
     Route::get('/price', 'changeGlobalsController@index');
     Route::post('/price', 'changeGlobalsController@store');
 
