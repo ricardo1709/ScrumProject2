@@ -1,6 +1,6 @@
 var url = "http://www.omdbapi.com/?i=tt3896198&apikey=11afb677&s=";
 var results = [];
-$("#movieName").change(function() {
+$("#movieName").keyup(function() {
 	var title = document.getElementById("movieName").value;
 	var preppedUrl = url + title;
 
@@ -29,13 +29,22 @@ $("#movieName").change(function() {
             for (var i = results.length - 1; i >= 0; i--) {
                 var ul = document.getElementById("titles");
                 var li = document.createElement("li");
-                li.appendChild(document.createTextNode(results[i]));
+
+                var a = document.createElement("a");
+                a.appendChild(document.createTextNode(results[i]));
+                a.setAttribute("onclick", "SelectResult('" + results[i] + "')")
+
+                //document.createTextNode(results[i])
+                li.appendChild(a);
+
                 ul.appendChild(li);
             }
         }
-    });
-
-
-	
-  
+    });  
 });
+
+function SelectResult(thename) {
+    // document.getElementById("movieName").setAttribute('value', thename);
+    $("#movieName").val(thename);
+    document.getElementById("movieAddForm").submit();
+}
