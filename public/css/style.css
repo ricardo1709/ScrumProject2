@@ -84,3 +84,8 @@
 .acceptchairs ul {
 	margin-top: 5%;
 }
+
+#titles a:hover {
+	font-weight: bolder;
+	color: blue;
+}
