@@ -78,7 +78,6 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Accepteer</button>
-                    <a href="https://www.google.nl/search?safe=active&ei=m6e4Wr_KB4HDwAKGqo3wDg&q=cookies+on+a+website&oq=cookies+on+a+we&gs_l=psy-ab.3.0.0i19k1j0i22i30i19k1l9.8056.29575.0.31655.63.47.7.0.0.0.147.2783.44j2.46.0....0...1c.1.64.psy-ab..17.46.2389...0j0i7i30k1j0i7i10i30k1j0i13k1j0i7i30i19k1j0i30k1j0i13i30k1j0i10k1j0i22i30k1j0i22i10i30i19k1j33i160k1j33i22i29i30k1j0i67k1j0i131k1j0i10i30k1j0i22i10i30k1.0.vz2jtSH6FUA&gws_rd=cr&dcr=0" class="btn btn-default"> Weiger </a>
                   </div>
                 </div>
               </div>
