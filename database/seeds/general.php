@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Movie;
 use App\Room;
 use App\Seat;
 

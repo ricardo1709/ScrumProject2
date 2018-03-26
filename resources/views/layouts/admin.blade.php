@@ -70,14 +70,18 @@
     <div class="admin-main">
         <div class="nav-left">
             <h3><a href="/admin">DASHBOARD</a></h3>
+            @if(\Auth::user()['role'] >= 2)
             <ul class="list-group list-group-flush">
                 <li>
                     <h4>Films</h4>
                 </li>
+                @if(\Auth::user()['role'] >= 3)
                 <li class="@if(strpos($_SERVER['REQUEST_URI'],'movieupdate')) dash-active @endif"><a href="/admin/movieupdate">Toevoegen</a></li>
+                @endif
                 <li class="@if(strpos($_SERVER['REQUEST_URI'],'planning/create')) dash-active @endif"><a href="/admin/planning/create">Inplannen</a></li>
                 <li class="@if(strpos($_SERVER['REQUEST_URI'],'planning')) dash-active @endif"><a href="/admin/planning">Planning</a></li>
             </ul>
+            
             <ul class="list-group list-group-flush">
                 <li>
                     <h4>Zalen</h4>
@@ -85,6 +89,8 @@
                 <li><a href="">Alle zalen</a></li>
                 <li><a href="">Zaal wijzigen</a></li>
             </ul>
+            
+            @endif
             <ul class="list-group list-group-flush">
                 <li>
                     <h4>Tickets</h4>
