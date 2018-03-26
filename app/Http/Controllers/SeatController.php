@@ -11,11 +11,7 @@ class SeatController extends Controller
 {
     public function show($id) 
     {
-        $theroomid = DB::table('plannings')->where('movieId', $id)->get();
-
-        $theroomid->get(0);
-
-
+        $theroomid = DB::table('plannings')->where('movieId', $id)->pluck('roomId');
 
         $rooms = DB::table('rooms')->where('roomId', $theroomid)->get();
         
@@ -58,7 +54,7 @@ class SeatController extends Controller
             $loveSeatArray[($rm->roomId)] = DB::table('seats')->where('roomId', ($rm->roomId))->where('isLoveseat', 1)->get()->toArray();
         }
 
-        return view('order', ['rooms' => $rooms, 'seatStrings' => $seatStrings, 'loveSeatStrings' => $loveSeatStrings, 'seatArray' => $seatArray, 'loveSeatArray' => $loveSeatArray]);
+        return view('orderEmployee', ['rooms' => $rooms, 'seatStrings' => $seatStrings, 'loveSeatStrings' => $loveSeatStrings, 'seatArray' => $seatArray, 'loveSeatArray' => $loveSeatArray]);
 
         //return $seatArray;
     }
