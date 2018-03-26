@@ -75,3 +75,12 @@
 #thebutton {
 	display: none;
 }
+
+.paycontrols {
+	display: flex;
+	justify-content: space-around;
+}
+
+.acceptchairs ul {
+	margin-top: 5%;
+}

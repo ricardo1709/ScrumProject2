@@ -109,9 +109,9 @@
             
                 </ul>
                 <div class="orderbuttons card-header">
+                    <a class="btn btn-danger" onclick="Clear()">Wissen</a>
                     <a class="btn btn-primary" onclick="Order()">Bestellen</a>
                     <span id="paylocation">{{route('pay')}}</span>
-                    <a class="btn btn-danger" onclick="Clear()">Wissen</a>
                 </div>
 
             </div>
@@ -219,8 +219,12 @@
 
 <link rel="stylesheet" href="css/style.css">
 <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
-<script src="js/slider.js"></script>
-<script src="js/orderseat.js"></script>
+<script src="js/scriptloader.js"></script>
+
+<script type="text/javascript">
+  LoadScript('js/slider.js');
+  LoadScript('js/orderseat.js');
+</script>
 
 @foreach ($rooms as $room)
   @if (!empty($seatArray[$room->roomId]))

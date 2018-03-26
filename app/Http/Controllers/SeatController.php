@@ -9,24 +9,54 @@ use Illuminate\Support\Facades\DB;
 
 class SeatController extends Controller
 {
-	public function index()
+    public function show($id) 
     {
-    	$rooms = DB::table('rooms')->get();
-    	
-    	$seatStrings = array();
-    	$loveSeatStrings = array();
+        $theroomid = DB::table('plannings')->where('movieId', $id)->get();
 
-    	$seatArray = array();
+        $theroomid->get(0);
+
+
+
+        $rooms = DB::table('rooms')->where('roomId', $theroomid)->get();
+        
+        $seatStrings = array();
+        $loveSeatStrings = array();
+
+        $seatArray = array();
         $loveSeatArray = array();
 
-    	foreach ($rooms as $rm) {
-    		$seatStrings[$rm->roomId] = "repeat(" . ($rm->seats / $rm->rows) . ", 1fr);";
-    		$loveSeatStrings[$rm->roomId] = "repeat(" . ($rm->loverSeats / $rm->loverRow) . ", 1fr);";
-    		
-    		$seatArray[($rm->roomId)] = DB::table('seats')->where('roomId', ($rm->roomId))->where('isLoveseat', 0)->get()->toArray();
+        foreach ($rooms as $rm) {
+            $seatStrings[$rm->roomId] = "repeat(" . ($rm->seats / $rm->rows) . ", 1fr);";
+            $loveSeatStrings[$rm->roomId] = "repeat(" . ($rm->loverSeats / $rm->loverRow) . ", 1fr);";
+            
+            $seatArray[($rm->roomId)] = DB::table('seats')->where('roomId', ($rm->roomId))->where('isLoveseat', 0)->get()->toArray();
 
             $loveSeatArray[($rm->roomId)] = DB::table('seats')->where('roomId', ($rm->roomId))->where('isLoveseat', 1)->get()->toArray();
-    	}
+        }
+
+        return view('order', ['rooms' => $rooms, 'seatStrings' => $seatStrings, 'loveSeatStrings' => $loveSeatStrings, 'seatArray' => $seatArray, 'loveSeatArray' => $loveSeatArray]);
+
+        //return $seatArray;
+    }    
+
+	public function showAll()
+    {
+    	$rooms = DB::table('rooms')->get();
+        
+        $seatStrings = array();
+        $loveSeatStrings = array();
+
+        $seatArray = array();
+        $loveSeatArray = array();
+
+        foreach ($rooms as $rm) {
+            $seatStrings[$rm->roomId] = "repeat(" . ($rm->seats / $rm->rows) . ", 1fr);";
+            $loveSeatStrings[$rm->roomId] = "repeat(" . ($rm->loverSeats / $rm->loverRow) . ", 1fr);";
+            
+            $seatArray[($rm->roomId)] = DB::table('seats')->where('roomId', ($rm->roomId))->where('isLoveseat', 0)->get()->toArray();
+
+            $loveSeatArray[($rm->roomId)] = DB::table('seats')->where('roomId', ($rm->roomId))->where('isLoveseat', 1)->get()->toArray();
+        }
 
         return view('order', ['rooms' => $rooms, 'seatStrings' => $seatStrings, 'loveSeatStrings' => $loveSeatStrings, 'seatArray' => $seatArray, 'loveSeatArray' => $loveSeatArray]);
 
