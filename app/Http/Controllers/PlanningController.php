@@ -46,7 +46,7 @@ class PlanningController extends Controller
         
         //$movie = Movie::query()->where('movieTitle', '=', $movie)->first(['movieId'])['movieId'];
         Planning::query()->insert(['movieId'=> $movie, 'time'=> $time, 'roomId' => $room]);
-        return redirect('/movies');
+        return redirect('/admin/planning');
     }
 
     /**
