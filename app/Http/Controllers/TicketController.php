@@ -40,11 +40,7 @@ class TicketController extends Controller
             $data['planning'] = Planning::where('movieId', $reserve->movieId)->first();
             
             $totaldata[] = $data;
-           
-            
-            
 
-            
             $currentTime = Carbon::now();
         }
         setlocale(LC_TIME, 'Dutch');
