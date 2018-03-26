@@ -74,7 +74,6 @@
                 @if(\Auth::user()['role'] >= 3)
                 <li class="@if(strpos($_SERVER['REQUEST_URI'],'movieupdate')) dash-active @endif"><a href="/admin/movieupdate">Toevoegen</a></li>
                 @endif
-                <li class="@if(strpos($_SERVER['REQUEST_URI'],'planning/create')) dash-active @endif"><a href="/admin/planning/create">Inplannen</a></li>
                 <li class="@if(strpos($_SERVER['REQUEST_URI'],'planning')) dash-active @endif"><a href="/admin/planning">Planning</a></li>
             </ul>
             
