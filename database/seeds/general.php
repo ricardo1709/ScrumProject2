@@ -21,24 +21,29 @@ class general extends Seeder
                 'name' => 'admin',
                 'email' => 'admin@admin.com',
                 'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm',
-                'role' => '3'
+                'role' => '3',
+                'remember_token' => str_random(10)
+                
             ],
             [
                 'name' => 'owner',
                 'email' => 'owner@admin.com',
                 'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm',
-                'role' => '2'
+                'role' => '2',
+                'remember_token' => str_random(10)
             ],
             [
                 'name' => 'medewerker',
                 'email' => 'medewerker@admin.com',
                 'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm',
-                'role' => '1'
+                'role' => '1',
+                'remember_token' => str_random(10)
             ],
             [
-                'name' => 'custom',
-                'email' => 'custom@admin.com',
-                'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm'
+                'name' => 'customer',
+                'email' => 'customer@admin.com',
+                'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm',
+                'remember_token' => str_random(10)
             ]
         ];
         
@@ -51,19 +56,19 @@ class general extends Seeder
         $rooms = [
             [
                 'seats' => '30',
-                'loverSeats' => '5',
+                'loverSeats' => '6',
                 'loverRow' => '3',
                 'rows' => '6'
             ],
             [
                 'seats' => '30',
-                'loverSeats' => '5',
+                'loverSeats' => '6',
                 'loverRow' => '3',
                 'rows' => '6'
             ],
             [
                 'seats' => '30',
-                'loverSeats' => '5',
+                'loverSeats' => '6',
                 'loverRow' => '3',
                 'rows' => '6'
             ]
@@ -75,6 +80,8 @@ class general extends Seeder
             
             for ($i=0;$i<$room['seats'];$i++)
                Seat::query()->insert(['roomId' => $id, 'isGereserveerd' => 0]);
+            for ($i=0;$i<$room['loverSeats'];$i++)
+                Seat::query()->insert(['roomId' => $id, 'isGereserveerd' => 0, 'isLoveseat' => 1]);
         }
         
     }
