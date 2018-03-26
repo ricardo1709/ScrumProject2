@@ -34,7 +34,8 @@ Route::get('/movies/{id}', 'MovieController@show');
     
 Route::group(['middleware'=>['auth']], function (){
     Route::get('/home', 'HomeController@index')->name('home');
-    Route::get('/bestellen', 'SeatController@index')->name('order');
+
+    Route::get('/bestellen/{id}', 'SeatController@show')->name('order');
 
     Route::get('/tickets', 'TicketController@index');
     Route::post('/pay', 'PayController@store')->name('pay');
@@ -64,6 +65,8 @@ Route::group(['middleware'=>['auth']], function (){
         Route::get('/planning/create', 'PlanningController@create');
         Route::get('/planning', 'PlanningController@index');
         Route::post('/planning/create', 'PlanningController@store');
+
+        Route::get('/selectseats', 'SeatController@showAll');
 		
 		Route::get('/paysuccessemployee', 'PayController@completeemployee')->name('paysuccessemployee');
 

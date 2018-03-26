@@ -17,17 +17,24 @@
                     </div>
                     @endif
 
-                <p>Medewerker heeft betaald voor de stoelen:</p>
-                <ul>
-                    @foreach ($allseats as $seat)
-                        <li>Stoel: {{ $seat }}</li>
-                    @endforeach
-                </ul>
+                    <div class="acceptchairs">
+                        <p>Medewerker heeft de volgende stoelen geselecteerd:</p>
+                        <ul>
+                            @foreach ($allseats as $seat)
+                                <li>Stoel: {{ $seat }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+
+
                 
-                    
+                    <div class="paycontrols">
+                        <a class="btn btn-danger" href="{{ route('home') }}">Afbreken</a>
+                        <a class="btn btn-primary" href="">Bevestigen &amp; Bestellen</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 @endsection
