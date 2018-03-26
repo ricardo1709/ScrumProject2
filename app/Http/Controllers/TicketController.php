@@ -41,14 +41,14 @@ class TicketController extends Controller
             
             $totaldata[] = $data;
            
-            $begintijd = new Carbon($data['planning']->time);
-            $addMinutes = $data['movie']->speeltijd;
+            
+            
 
-            $date = new Carbon($data['planning']->date);
-
+            
+            $currentTime = Carbon::now();
         }
         setlocale(LC_TIME, 'Dutch');
-        return view('/ticketoverview', compact('totaldata', 'begintijd', 'addMinutes', 'date'));
+        return view('/ticketoverview', compact('totaldata', 'begintijd', 'addMinutes', 'date', 'currentTime'));
 
 
 
@@ -177,6 +177,7 @@ class TicketController extends Controller
         Seat::query()->where('seatId', '=', $ticket->seatId)->first()->reserve(false);
         Reserve::query()->where('ticketId', '=', $id)->delete();
         $ticket->delete();
+        return view('ticket.ticketcancel', compact('id'));
     }
 
     // This method generates a PDF from an html template
