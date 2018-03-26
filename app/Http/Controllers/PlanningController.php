@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Movie;
+use App\Room;
 use App\Planning;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -16,13 +17,18 @@ class PlanningController extends Controller
 
     public function index()
     {
-        $planning = Planning::query()->where("time", '=', \Carbon\Carbon::now()->toDateTimeString())->get();
-        return view("planning/index")->with("date", \Carbon\Carbon::now());
+        $date = ['day' => date('d'), 'month' => date('m'), 'year' => date('y')];
+
+        $rooms = Room::get();
+
+        $movies = Movie::get();
+
+        return view("planning/index", compact("date", "rooms", "movies"));
     }
 
     public function create()
     { 
-        return view('planning.blade.php');
+        return view('planning');
     }
 
     /**
