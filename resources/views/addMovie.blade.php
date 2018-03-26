@@ -29,6 +29,13 @@
 @endsection
 
 @section('page-script')
-	<script type="text/javascript" src="{{ URL::asset('js/autocomplete.js') }}"></script>
-	<link rel="stylesheet" href="{{ URL::asset('css/style.css') }}">
+	<script src="{{ asset('js/scriptloader.js') }}"></script>
+
+	<?php $autocompletesrc = asset('js/autocomplete.js') ?>
+
+	<script type="text/javascript">
+  		LoadScript('{{ $autocompletesrc }}');
+	</script>
+	
+	<link rel="stylesheet" href="{{ asset('css/style.css') }}">
 @endsection
