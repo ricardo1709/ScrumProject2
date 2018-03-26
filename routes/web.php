@@ -46,6 +46,10 @@ Route::group(['middleware'=>['auth']], function (){
     Route::get('/barcodes', 'BarcodeScannerController@index');
     Route::post('/barcodes', 'BarcodeScannerController@check');
     
+    Route::get('/medewerker', 'medewerkerController@index');
+    Route::post('/medewerker', 'medewerkerController@store');
+    Route::get('medewerker/{id}/delete', 'medewerkerController@delete');
+    
     Route::get('/price', 'changeGlobalsController@index');
     Route::post('/price', 'changeGlobalsController@store');
 
@@ -62,20 +66,20 @@ Route::group(['middleware'=>['auth']], function (){
         Route::get('/ticket', 'TicketController@index');
         Route::get('/ticket/create', 'TicketController@create');
         Route::post('/ticket/create', 'TicketController@store');
-        Route::get('/planning/create', 'PlanningController@create');
-        Route::get('/planning', 'PlanningController@index');
-        Route::post('/planning/create', 'PlanningController@store');
-
+        Route::get('/paysuccessemployee', 'PayController@completeemployee')->name('paysuccessemployee');
         Route::get('/selectseats', 'SeatController@showAll');
-		
-		Route::get('/paysuccessemployee', 'PayController@completeemployee')->name('paysuccessemployee');
-
-        Route::group(['middleware' => ['collaborator:3']], function(){
-            Route::get('/movieupdate', 'MovieController@movieAdd');
-            Route::post('/movieupdate', 'MovieController@store');
-
+        
+        Route::group(['middleware' => ['collaborator:2']], function(){             
+            Route::get('/planning/create', 'PlanningController@create');
+            Route::get('/planning', 'PlanningController@index');
+            Route::post('/planning/create', 'PlanningController@store');
+            
+            Route::group(['middleware' => ['collaborator:3']], function(){
+                Route::get('/movieupdate', 'MovieController@movieAdd');
+                Route::post('/movieupdate', 'MovieController@store');
+    
+            });
         });
-
     });
     Route::group(['middleware' => ['ticketowner', 'tickettimeout']], function (){
         Route::get('/ticket/{id}/view', 'TicketController@show');

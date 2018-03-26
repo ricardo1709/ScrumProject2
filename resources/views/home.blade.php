@@ -13,7 +13,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    @if($currentUser['role'] == 3)
+                    @if($currentUser['role'] >= 1)
                         <p>Klik hier om naar het Admin Dashboard te gaan,</p>
                         <a href="/admin" class="btn btn-primary" role="button">Ga naar Admin Dashboard</a>
                     @endif
