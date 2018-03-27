@@ -15,6 +15,11 @@ class UpdateMovieTable extends Migration
     {
         Schema::table('movies', function (Blueprint $table) {
             $table->text('poster');
+            $table->text('released');
+            $table->text('director');
+            $table->text('writer');
+            $table->text('actors');
+            $table->string('boxOffice', 20);
         });
     }
 
