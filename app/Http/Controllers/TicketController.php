@@ -8,6 +8,12 @@ use Dompdf\Dompdf;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Milon\Barcode\DNS1D;
+use App\Transaction;
+use App\Movie;
+use App\Reserve;
+use App\Planning;
+use Carbon\Carbon;
+use App\Seat;
 use Illuminate\Support\Facades\DB;
 
 class TicketController extends Controller
@@ -15,11 +21,34 @@ class TicketController extends Controller
     public function __construct()
     {
         
-    }
+    }          
+    
 
     public function index()
     {
-        //
+        $userId = Auth::user()->id;
+        $reserves = Reserve::where('userId', $userId)->get();
+
+        $totaldata = [];
+        foreach ($reserves as $reserve){
+           
+            $data = [];
+            $data['ticket'] = Ticket::where('ticketId', '=', $reserve->ticketId)->first();
+           
+            $data['movie'] = Movie::where('movieId', $reserve->movieId)->first();
+
+            $data['planning'] = Planning::where('movieId', $reserve->movieId)->first();
+            
+            $totaldata[] = $data;
+
+            $currentTime = Carbon::now();
+        }
+        setlocale(LC_TIME, 'Dutch');
+        return view('/ticketoverview', compact('totaldata', 'begintijd', 'addMinutes', 'date', 'currentTime'));
+
+
+
+
     }
 
     public function create($allseatids)
@@ -86,6 +115,8 @@ class TicketController extends Controller
 
         foreach ($seats as $seat)
         {
+            Seat::query()->where('seatId')->first()->reserve(true);
+            
             $ticket = \App\Ticket::query()->insertGetId(
                 [ 'seatId' => $seat, 'movieId' => $movie,
                   'transactionId' => $transaction, 'barcode' => "123456789"]
@@ -138,7 +169,11 @@ class TicketController extends Controller
 
     public function destroy($id)
     {
-        //
+        $ticket = Ticket::query()->where('ticketId', '=', $id)->first();
+        Seat::query()->where('seatId', '=', $ticket->seatId)->first()->reserve(false);
+        Reserve::query()->where('ticketId', '=', $id)->delete();
+        $ticket->delete();
+        return view('ticket.ticketcancel', compact('id'));
     }
 
     // This method generates a PDF from an html template

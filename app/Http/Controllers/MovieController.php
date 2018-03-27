@@ -4,44 +4,139 @@ namespace App\Http\Controllers;
 
 use App\Movie;
 use Illuminate\Http\Request;
-//use App\Product;
-//use App\Http\Requests;
 use GuzzleHttp\Client;
-//use GuzzleHttp\Message\Request;
-//use GuzzleHttp\Message\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class MovieController extends Controller
 {
-    public function index()
-    {
-        // $movies = Movie::orderBy('created_at','desc')->paginate(10);
-        $movies = DB::table('movies')
-            ->join('plannings', 'movies.movieId', '=', 'plannings.movieId')
-            ->select('movies.movieId', 'movieTitle', 'movieDescription', 'roomId', 'time')
+	public function index()
+	{
+		If(empty($_GET['date'])) {
+			$_GET['date'] = date('y-m-d');
+		}
+
+		// This if statement checks if a genre has been selected and also checks if a radiobutton has been selected
+		// so that when the page refreshes the radiobutton doesn't get unchecked
+
+		if(!empty($_GET['genre'])) {
+			$movies = Movie::join('plannings', 'movies.movieId', '=', 'plannings.movieId')
+				->where('time' , $_GET['date'])
+                ->where('genre', $_GET['genre'])
+                ->orWhere('genre', 'like', '%' . $_GET['genre'] . '%')
+                ->get();
+
+			$radioSelected = $_GET['genre'];
+		} else {
+            $movies = Movie::join('plannings', 'movies.movieId', '=', 'plannings.movieId')
+                ->whereDate('time' , $_GET['date'])
+	            ->orderBy('time', 'asc')
+	            ->get();
+
+            $radioSelected = "All";
+		}
+
+        $date = ['day' => date('d'), 'month' => date('m'), 'year' => date('y')];
+
+        $movieGenres = $this->getGenres();
+
+        if(!empty($_GET['date'])){
+            if($_GET['date'] != date('d')){
+                $dateSelected = $_GET['date'];
+            } else {
+                $dateSelected = date('d');
+            }
+        } else {
+            $dateSelected = date('d');
+            $_GET['date'] = date('d');
+        }
+
+
+		return view('overview', compact('movieGenres', 'radioSelected', 'movies', 'date', 'dateSelected'));
+	}
+
+
+	public function getGenres()
+	{
+
+		$movieGenres = [];
+
+		$cleanGenres = [];
+
+		$finishGenres = [];
+
+		$movies = Movie::join('plannings', 'movies.movieId', '=', 'plannings.movieId')
             ->orderBy('time', 'asc')
             ->get();
 
-        return view('overview', compact('movies'));
-    }
+		// Generates an array with movie genres
+		foreach($movies as $movie) {
+			if(!in_array($movie->genre, $movieGenres)){
+				$movieGenres[] = $movie->genre;
+			}
+		}
 
-    public function create()
+		// Seperates genres that are in one string but contain a comma.
+		foreach($movieGenres as $movieGenre) {
+			$newGenres = explode(',', $movieGenre);
+			foreach($newGenres as $genre) {
+				$cleanGenres[] = str_replace(' ','',$genre);
+
+			}
+		}
+
+
+
+		// Clears incorrect $movieGenres array
+		unset($movieGenres);
+		// Fills $movieGenres with correct data
+		$movieGenres = $cleanGenres;
+
+
+		// Removes double genres from array
+		foreach($movieGenres as $movieGenre) {
+			if(!in_array($movieGenre, $finishGenres)){
+				$finishGenres[] = $movieGenre;
+
+			}
+		}
+
+		// Clears incorrect $movieGenres array
+		unset($movieGenres);
+		// Fills $movieGenres with correct data
+		$movieGenres = $finishGenres;
+
+		sort($movieGenres);
+
+		return $movieGenres;
+	}
+
+
+	public function create()
     {
         
     }
 
     public function store(Request $request)
     {
-        $url = 'http://www.omdbapi.com/?i=tt3896198&apikey=11afb677&t=' . $request->get('movieAdd');
+    	$noMovieError = null;
+    	$movieTitleUrl = ucwords(strtolower($request->get('movieAdd')));
+        $url = 'http://www.omdbapi.com/?i=tt3896198&apikey=11afb677&t=' . $movieTitleUrl;
         $client = new Client();
         $api_response = $client->get($url);
         $response = $api_response->getBody();
         $movies = json_decode($response);
-        DB::table('movies')->insert(
-            ['movieTitle' => $movies->Title, 'movieDescription' => $movies->Plot, 'moviePrice' => 0, 'speeltijd' => $movies->Runtime, 'genre' => $movies->Genre]
-        );
-        return redirect('/admin/movieupdate');
+        try
+		{
+	        DB::table('movies')->insert(
+	            ['movieTitle' => $movies->Title, 'movieDescription' => $movies->Plot, 'moviePrice' => 0, 'speeltijd' => $movies->Runtime, 'genre' => $movies->Genre, 'poster' => $movies->Poster, 'released' => $movies->Released, 'director' => $movies->Director, 'writer' =>$movies->Writer, 'actors' => $movies->Actors, 'boxOffice' => $movies->BoxOffice]
+	        );
+	    }
+	    catch(\Exception $e){
+	    	//no movie found
+			$noMovieError = "invalid movie title";
+	    }
+        return view('addMovie', ['noMovieError' => $noMovieError]);
     }
 
     public function show($id)
@@ -53,9 +148,15 @@ class MovieController extends Controller
         $desc = $movieInfo->movieDescription;
         $runtime = $movieInfo->speeltijd;
         $genre = $movieInfo->genre; 
+        $poster = $movieInfo->poster;
+        $released = $movieInfo->released;
+        $director = $movieInfo->director;
+        $writer = $movieInfo->writer;
+        $actor = $movieInfo->actors;
+        $budget = $movieInfo->boxOffice;
         
         //dd($genre);
-        return view('movie', compact('loggedIn', 'title', 'desc', 'runtime', 'genre'));
+        return view('movie', compact('loggedIn', 'title', 'desc', 'runtime', 'genre', 'id', 'poster', 'released', 'director', 'writer', 'actor', 'budget'));
     }
 
     function edit($id)
@@ -76,19 +177,9 @@ class MovieController extends Controller
     }
 
     public function movieAdd(){
+    	$noMovieError = "";
 
-
-        return view('Admin/addMovie');
+        return view('addMovie', ['noMovieError' => $noMovieError]);
     }
-
-    public function addMovie(Request $require){
-        $url = 'http://www.omdbapi.com/?i=tt3896198&apikey=11afb677&t=' . $require->get('movieAdd');
-    	$client = new Client();
-    	$api_response = $client->get($url);
-    	$response = $api_response->getBody();
-    	$movies = json_decode($response);
-        DB::table('movies')->insert(
-            ['movieTitle' => $movies->Title, 'movieDescription' => $movies->Plot, 'moviePrice' => 0]
-        );
-    }
+	
 }

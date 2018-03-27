@@ -17,12 +17,22 @@
                     </div>
                     @endif
 
-                <p>U heeft betaald voor de stoelen: {{ $allseats }}</p>
-                
-                    
+                    <div class="acceptchairs">
+                        <p>U heeft de volgende stoelen geselecteerd:</p>
+                        <ul>
+                            @foreach ($allseats as $seat)
+                                <li>Stoel: {{ $seat }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+
+                    <div class="paycontrols">
+                        <a class="btn btn-danger" href="{{ route('home') }}">Afbreken</a>
+                        <a class="btn btn-primary" href="{{ route('paypal.express-checkout') }}">Bevestigen &amp; Bestellen</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 @endsection

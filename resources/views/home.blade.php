@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card card-default">
-                <div class="card-header">Dashboard</div>
+                <div class="card-header"><p>Welkom, {{ $currentUser['name'] }}!</p></div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -13,17 +13,10 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-                    You are logged in!
-                    <form action="localhost:8000/admin/ticket" method="post">
-                        {{ csrf_field() }}
-                        <input name="seats[]" type="text">
-                        <input name="seats[]" type="text">
-
-                        <input name="movie" type="text">
-
-                        <input type="submit" value="send">
-                    </form>
+                    @if($currentUser['role'] >= 1)
+                        <p>Klik hier om naar het Admin Dashboard te gaan,</p>
+                        <a href="/admin" class="btn btn-primary" role="button">Ga naar Admin Dashboard</a>
+                    @endif
                 </div>
             </div>
         </div>

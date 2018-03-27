@@ -11,7 +11,7 @@
 
 .zaal {
 	width: 100%;
-	height: 100%;
+/*	height: 100%;*/
 }
 
 .zaalheader {
@@ -66,4 +66,26 @@
 	color: blue;
 	font-weight: bolder;
 	text-shadow: 0px 1px #000000;
+}
+
+.error{
+	color: red;
+}
+
+#thebutton {
+	display: none;
+}
+
+.paycontrols {
+	display: flex;
+	justify-content: space-around;
+}
+
+.acceptchairs ul {
+	margin-top: 5%;
+}
+
+#titles a:hover {
+	font-weight: bolder;
+	color: blue;
 }

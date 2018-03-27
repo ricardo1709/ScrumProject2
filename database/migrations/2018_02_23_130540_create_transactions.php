@@ -18,6 +18,7 @@ class CreateTransactions extends Migration
             $table->decimal('payedAmount', 8, 2);
             $table->integer('movieId')->unsigned();
             $table->integer('userId')->unsigned();
+            $table->string('payment_status')->nullable();
 
             $table->foreign('movieId')->references('movieId')->on('movies');
             $table->foreign('userId')->references('id')->on('users');
