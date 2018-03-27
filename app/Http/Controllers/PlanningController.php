@@ -23,7 +23,67 @@ class PlanningController extends Controller
 
         $movies = Movie::get();
 
-        return view("planning/index", compact("date", "rooms", "movies"));
+        $schedule = $this->getPlanned();
+
+        return view("planning/index", compact("date", "rooms", "movies", "schedule"));
+    }
+
+    public function generatePlanningDates()
+    {
+        $date = ['day' => date('d'), 'month' => date('m'), 'year' => date('y')];
+
+        $commmingDates = [];
+
+        for($i = 0; $i < 14; $i++)
+        {
+            $commingDates[] = "20" . $date['year'] . "-" . $date['month'] . "-" . $date['day'];
+            if($date['day'] > 30){
+                $date['month']++;
+                $date['day'] = 1;
+            } else {
+                $date['day']++;
+            }
+        }
+
+        return $this->generatePlanningTimes($commingDates);
+    }
+
+    public function generatePlanningTimes($dates)
+    {
+        foreach($dates as $date)
+        {
+            $newDate = [$date . ' 15:00:00', $date . ' 18:00:00', $date . ' 20:30:00', $date . ' 22:30:00'];
+            $newDates[] = $newDate;
+        }
+
+        return $newDates;
+    }
+
+    public function getPlanned()
+    {
+        $timesArray = $this->generatePlanningDates();
+
+        $currentPlanning = Planning::get();
+
+        $schedule[] = "0000-00-00 00:00:00";
+
+        foreach($currentPlanning as $plannedMovie) {
+            $schedule[] = $plannedMovie->time;
+        }
+
+        foreach($timesArray as $timeArray)
+        {
+            foreach($timeArray as $time)
+            {
+                if(!in_array($time, $schedule))
+                {
+                   $planning[] = $time;
+                }
+            }
+        }
+
+        return $planning;
+
     }
 
     public function create()
@@ -46,7 +106,7 @@ class PlanningController extends Controller
         
         //$movie = Movie::query()->where('movieTitle', '=', $movie)->first(['movieId'])['movieId'];
         Planning::query()->insert(['movieId'=> $movie, 'time'=> $time, 'roomId' => $room]);
-        return redirect('/movies');
+        return redirect('/admin/planning');
     }
 
     /**

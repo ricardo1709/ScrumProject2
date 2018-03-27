@@ -15,11 +15,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <!-- JAVASCRIPT -->
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/jquery-3.3.1.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="js/ajaxfixer.js"></script>
-
+    <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
 </head>
 <body>
 <div id="app">
@@ -70,14 +66,17 @@
     <div class="admin-main">
         <div class="nav-left">
             <h3><a href="/admin">DASHBOARD</a></h3>
+            @if(\Auth::user()['role'] >= 2)
             <ul class="list-group list-group-flush">
                 <li>
                     <h4>Films</h4>
                 </li>
+                @if(\Auth::user()['role'] >= 3)
                 <li class="@if(strpos($_SERVER['REQUEST_URI'],'movieupdate')) dash-active @endif"><a href="/admin/movieupdate">Toevoegen</a></li>
-                <li class="@if(strpos($_SERVER['REQUEST_URI'],'planning/create')) dash-active @endif"><a href="/admin/planning/create">Inplannen</a></li>
+                @endif
                 <li class="@if(strpos($_SERVER['REQUEST_URI'],'planning')) dash-active @endif"><a href="/admin/planning">Planning</a></li>
             </ul>
+            
             <ul class="list-group list-group-flush">
                 <li>
                     <h4>Zalen</h4>
@@ -85,6 +84,8 @@
                 <li><a href="">Alle zalen</a></li>
                 <li><a href="">Zaal wijzigen</a></li>
             </ul>
+            
+            @endif
             <ul class="list-group list-group-flush">
                 <li>
                     <h4>Tickets</h4>

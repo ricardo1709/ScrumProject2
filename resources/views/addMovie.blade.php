@@ -16,10 +16,10 @@
 					Movie doesn't exist!
 				@endif
 			</h3>
-			<form action="{{action('MovieController@store')}}" method="post">
+			<form action="{{action('MovieController@store')}}" method="post" id="movieAddForm">
 				{{csrf_field()}}
 				<label for="movieName">Movie name</label>
-				<input id="movieName" type="text" name="movieAdd">
+				<input id="movieName" type="text" name="movieAdd" autocomplete="off">
 				<input type="submit" name="add" value="Add movie">
 			</form>
 
@@ -29,5 +29,13 @@
 @endsection
 
 @section('page-script')
-	<script type="text/javascript" src="{{ URL::asset('js/autocomplete.js') }}"></script>
+	<script src="{{ asset('js/scriptloader.js') }}"></script>
+
+	<?php $autocompletesrc = asset('js/autocomplete.js') ?>
+
+	<script type="text/javascript">
+  		LoadScript('{{ $autocompletesrc }}');
+	</script>
+	
+	<link rel="stylesheet" href="{{ asset('css/style.css') }}">
 @endsection
