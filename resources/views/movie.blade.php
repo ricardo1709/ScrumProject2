@@ -4,7 +4,7 @@
 <div class="banner">
     <div class="container-fluid">
         <div class="row">
-            <img src="//placehold.it/1624x500" style="width: 100%;">
+            <img src="{{ $poster }}" alt="Movie Post" style="width: 1624px; height: 500px;">
         </div>
     </div>
 </div>
@@ -38,20 +38,7 @@
             <h3 class="mb-3">Cast</h3>
             <div class="row">
                 <div class="col">
-                    <img src="http://via.placeholder.com/100x100">
-                    <p>Acteur</p>
-                </div>
-                <div class="col">
-                    <img src="http://via.placeholder.com/100x100">
-                    <p>Acteur</p>
-                </div>
-                <div class="col">
-                    <img src="http://via.placeholder.com/100x100">
-                    <p>Acteur</p>
-                </div>
-                <div class="col">
-                    <img src="http://via.placeholder.com/100x100">
-                    <p>Acteur</p>
+                    {{ $actor }}
                 </div>
             </div>
         </div>
@@ -70,22 +57,22 @@
 
             <div class="row">
                 <div class="col"><p>Director:</p></div>
-                <div class="col"><p>Haal director op</p></div>
+                <div class="col"><p>{{ $director }}</p></div>
             </div>
 
             <div class="row">
                 <div class="col"><p>Schrijvers:</p></div>
-                <div class="col"><p>Haal schrijvers op</p></div>
+                <div class="col"><p>{{ $writer }}</p></div>
             </div>
 
             <div class="row">
                 <div class="col"><p>Release:</p></div>
-                <div class="col"><p>Haal release op</p></div>
+                <div class="col"><p>{{ $released }}</p></div>
             </div>
 
             <div class="row">
                 <div class="col"><p>Budget:</p></div>
-                <div class="col"><p>Haal budget op</p></div>
+                <div class="col"><p>{{ $budget }}</p></div>
             </div>
 
             <div class="kijkwijzer mt-3">
