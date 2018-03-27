@@ -49,7 +49,7 @@
     </div>
 
     <div id="movies" class="container-fluid">
-        @foreach($movies as  $movie)
+        @foreach($movies as $movie)
             <div class="movieObject">
                 <div>
                     <img onClick="showOverlay({{ $movie->movieId }})" src="{{ $movie->poster }}" alt="Movie Post">
