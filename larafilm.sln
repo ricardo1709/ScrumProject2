@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2036
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{A0786B88-2ADB-4C21-ABE8-AA2D79766269}") = "larafilm", "larafilm.phpproj", "{AE72D59B-6EFC-4DA9-B831-4D4D602E807D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AE72D59B-6EFC-4DA9-B831-4D4D602E807D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE72D59B-6EFC-4DA9-B831-4D4D602E807D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AB209AA2-6B82-4C5B-B35B-3810FBFEFC6E}
+	EndGlobalSection
+EndGlobal
