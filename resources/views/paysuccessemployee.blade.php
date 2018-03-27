@@ -30,7 +30,7 @@
                 
                     <div class="paycontrols">
                         <a class="btn btn-danger" href="{{ route('home') }}">Afbreken</a>
-                        <a class="btn btn-primary" href="">Bevestigen &amp; Bestellen</a>
+                        <a class="btn btn-primary" href="{{ route('paypal.express-checkout' }}">Bevestigen &amp; Bestellen</a>
                     </div>
                 </div>
             </div>
