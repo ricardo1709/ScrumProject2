@@ -83,6 +83,7 @@
                 </li>
                 <li><a href="">Alle zalen</a></li>
                 <li><a href="">Zaal wijzigen</a></li>
+				<li><a href="/admin/selectseats">Stoelen Reserveren</a></li>
             </ul>
             
             @endif
