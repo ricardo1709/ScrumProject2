@@ -57,7 +57,7 @@
                                     @else
                                     <a onclick="Taken()">
                                     @endif
-                                        <img src="img/chair.png" alt="Stoel">
+                                        <img src="{{ asset('img/chair.png') }}" alt="Stoel">
                                         <p>
                                             @if ($seatArray[$room->roomId][($i - 1)]->isGereserveerd == 1)
                                             Stoel Bezet
@@ -80,7 +80,7 @@
                                     @else
                                     <a onclick="Taken()">
                                     @endif
-                                    <img src="img/loveseat.png" alt="LoveSeat Stoel">
+                                    <img src="{{ asset('img/loveseat.png') }}" alt="LoveSeat Stoel">
                                     @if ($loveSeatArray[$room->roomId][($i - 1)]->isGereserveerd == 1)
                                         <p>Love Seat Bezet</p>
                                     @else
@@ -217,13 +217,14 @@
 </div>
 @endsection
 
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="{{ asset('css/style.css') }}">
 <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
-<script src="js/scriptloader.js"></script>
+
+<script src="{{ asset('js/scriptloader.js') }}"></script>
 
 <script type="text/javascript">
-  LoadScript('js/slider.js');
-  LoadScript('js/orderseat.js');
+  LoadScript('{{ asset("js/slider.js") }}');
+  LoadScript('{{ asset("js/orderseat.js") }}');
 </script>
 
 @foreach ($rooms as $room)

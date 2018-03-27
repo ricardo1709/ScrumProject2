@@ -31,24 +31,9 @@
 					</li>
 
 					<select name="time" id="time">
-						@for($i = 0; $i < 14; $i++)
-							<optgroup label="{{ $date['day'] }}-{{ $date['month'] }}-{{ $date['year'] }}">
-								<option value="{{ $date['year'] }}-{{ $date['month'] }}-{{ $date['day'] }} 15:00">15:00 - 17:00</option>
-								<option value="{{ $date['year'] }}-{{ $date['month'] }}-{{ $date['day'] }} 18:00">18:00 - 20:00</option>
-								<option value="{{ $date['year'] }}-{{ $date['month'] }}-{{ $date['day'] }} 20:30">20:30 - 22:00</option>
-								<option value="{{ $date['year'] }}-{{ $date['month'] }}-{{ $date['day'] }} 22:30">22:30 - 00:00</option>
-							</optgroup>
-
-                            <?php
-                            if($date['day'] > 30){
-                                $date['month']++;
-                                $date['day'] = 1;
-                            } else {
-                                $date['day']++;
-                            }
-
-                            ?>
-						@endfor
+						@foreach($schedule as $date)
+							<option value="{{ $date }}">{{ $date }}</option>
+						@endforeach
 					</select>
 					<input type="submit" />
 				</form>

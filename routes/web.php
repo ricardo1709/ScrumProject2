@@ -53,6 +53,10 @@ Route::group(['middleware'=>['auth']], function (){
     Route::get('/price', 'changeGlobalsController@index');
     Route::post('/price', 'changeGlobalsController@store');
 
+    Route::get('paypal/express-checkout', 'PaypalController@expressCheckout')->name('paypal.express-checkout');
+    Route::get('paypal/express-checkout-success', 'PaypalController@expressCheckoutSuccess');
+    Route::post('paypal/notify', 'PaypalController@notify');
+
     Route::group(['middleware' => ['collaborator'], 'prefix' => '/admin'], function (){
         // localhost:8000/admin/
 
