@@ -29,20 +29,10 @@ class PayController extends Controller
 
 	    if (Auth::user()->role >= 1)
 	    {
-			// return view('paysuccessemployee', ['allseats' => $allseats]);
 			return View::make('paysuccessemployee', array('allseats' => $allseats));
-			// $returnHTML = view('paysuccessemployee')->with('allseats', $allseats)->render();
-			// return response()->json(array('success' => true, 'html'=>$returnHTML));
-
-			// return redirect(route('paysuccessemployee') . "/?=" . $allseats);
 	    }
 	    else {
-		    // return view('paysuccess', ['allseats' => $allseats]);
 		    return View::make('paysuccess', array('allseats' => $allseats));
-			// $returnHTML = view('paysuccess')->with('allseats', $allseats)->render();
-			// return response()->json(array('success' => true, 'html'=>$returnHTML));
-
-			// return redirect(route('paysuccess') . "/?=" . $allseats);
 	    }
     }
 	
