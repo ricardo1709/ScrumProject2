@@ -54,7 +54,7 @@
 	justify-content: space-around;
 }
 
-#paylocation {
+#paylocation, #mvid, #plid {
 	display: none;
 }
 

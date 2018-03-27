@@ -58,7 +58,7 @@
                 <div onClick="showOverlay({{ $movie->movieId }})" class="movieOverlay" id="movieOverlay{{ $movie->movieId }}">
                     <div class="overlayContent">
                         <h3>{{ $movie->movieTitle }}</h3>
-                        <a href="/movies/{{ $movie->movieId }}">Naar de Film</a>
+                        <a href="/movies/{{ $movie->planningId }}">Naar de Film</a>
                     </div>
                 </div>
             </div>

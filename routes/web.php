@@ -28,14 +28,14 @@ Route::get('/', function (){
 
 Auth::routes();
 Route::get('/movies', 'MovieController@index');
-Route::get('/movies/{id}', 'MovieController@show');
+Route::get('/movies/{id}', 'MovieController@show'); //PLANNING ID!
 
 
     
 Route::group(['middleware'=>['auth']], function (){
     Route::get('/home', 'HomeController@index')->name('home');
 
-    Route::get('/bestellen/{id}', 'SeatController@show')->name('order');
+    Route::get('/bestellen/{id}', 'SeatController@show')->name('order'); //PLANNING ID!
 
     Route::get('/tickets', 'TicketController@index');
     Route::post('/pay', 'PayController@store')->name('pay');
@@ -53,7 +53,7 @@ Route::group(['middleware'=>['auth']], function (){
     Route::get('/price', 'changeGlobalsController@index');
     Route::post('/price', 'changeGlobalsController@store');
 
-    Route::get('paypal/express-checkout', 'PaypalController@expressCheckout')->name('paypal.express-checkout');
+    Route::get('paypal/express-checkout/{mvid}/{plid}', 'PaypalController@expressCheckout')->name('paypal.express-checkout');
     Route::get('paypal/express-checkout-success', 'PaypalController@expressCheckoutSuccess');
     Route::post('paypal/notify', 'PaypalController@notify');
 

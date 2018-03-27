@@ -11,7 +11,7 @@ class PaypalController extends Controller
 	public function __construct() {
     	$this->provider = new ExpressCheckout();
 	}
-	public function expressCheckout(Request $request) {
+	public function expressCheckout($mvid, $plid) {
 	      
 	  $totalloveseat = 0;
         $totalseatprice = 0;

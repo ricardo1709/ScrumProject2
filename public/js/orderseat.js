@@ -207,6 +207,9 @@ function Order() {
 	if (selectedSeats.length > 0 || selectedLoveSeats.length > 0) {
 		//POST NAAR LARAVEL?
 		var locurl = document.getElementById("paylocation").innerHTML;
+		
+		var mvid = document.getElementById("mvid").innerHTML;
+		var plid = document.getElementById("plid").innerHTML;
 
 		//FixAjax();
 		var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
@@ -214,7 +217,7 @@ function Order() {
 		$.ajax({
         	type: 'POST',
         	url: locurl,
-        	data: {sseats:selectedSeats, sloveseats:selectedLoveSeats, _token:CSRF_TOKEN},
+        	data: {sseats:selectedSeats, sloveseats:selectedLoveSeats, _token:CSRF_TOKEN, movieId:mvid, planningId:plid},
         	cache: false,
         	success: function (data) {
         		// console.log(data);
