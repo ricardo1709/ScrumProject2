@@ -52,10 +52,10 @@
         @foreach($movies as $movie)
             <div class="movieObject">
                 <div>
-                    <img onClick="showOverlay({{ $movie->movieId }})" src="{{ $movie->poster }}" alt="Movie Post">
+                    <img onClick="showOverlay({{ $movie->planningId }})" src="{{ $movie->poster }}" alt="Movie Post">
                 </div>
 
-                <div onClick="showOverlay({{ $movie->movieId }})" class="movieOverlay" id="movieOverlay{{ $movie->movieId }}">
+                <div onClick="showOverlay({{ $movie->planningId }})" class="movieOverlay" id="movieOverlay{{ $movie->planningId }}">
                     <div class="overlayContent">
                         <h3>{{ $movie->movieTitle }}</h3>
                         <a href="/movies/{{ $movie->planningId }}">Naar de Film</a>

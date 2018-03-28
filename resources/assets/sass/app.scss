@@ -240,22 +240,22 @@ main {
 
 
   img{
-    height: 500px;
-    width: 400px;
+    height: 400px;
+    width: 300px;
   }
 
   .movieOverlay {
     display: none;
-    height: 500px;
-    width: 400px;
-    margin-top: -500px;
+    height: 400px;
+    width: 300px;
+    margin-top: -400px;
     position: absolute;
     background-color: rgba(255,255,255, 0.7);
   }
 
   .overlayContent {
-    height: 500px;
-    width: 400px;
+    height: 400px;
+    width: 300px;
     display:flex;
     align-items: center;
     justify-content: center;
