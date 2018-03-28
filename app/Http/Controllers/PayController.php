@@ -17,6 +17,11 @@ class PayController extends Controller
 		$s = $request->input('sseats');
 		$ls = $request->input('sloveseats');
         
+		$movieId = $request->input('movieId');
+		$planningId = $request->input('planningId');
+
+		$paypallstring = "/paypal/express-checkout/" . $movieId . "/" . $planningId;
+
         $allseats = array();
 
         if (!empty($s) && !empty($ls)) {
@@ -29,10 +34,10 @@ class PayController extends Controller
 
 	    if (Auth::user()->role >= 1)
 	    {
-			return View::make('paysuccessemployee', array('allseats' => $allseats));
+			return View::make('paysuccessemployee', array('allseats' => $allseats, 'paypallstring' => $paypallstring));
 	    }
 	    else {
-		    return View::make('paysuccess', array('allseats' => $allseats));
+		    return View::make('paysuccess', array('allseats' => $allseats, 'paypallstring' => $paypallstring));
 	    }
     }
 	

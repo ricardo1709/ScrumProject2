@@ -129,7 +129,7 @@ class MovieController extends Controller
         try
 		{
 	        DB::table('movies')->insert(
-	            ['movieTitle' => $movies->Title, 'movieDescription' => $movies->Plot, 'moviePrice' => 0, 'speeltijd' => $movies->Runtime, 'genre' => $movies->Genre, 'poster' => $movies->Poster]
+	            ['movieTitle' => $movies->Title, 'movieDescription' => $movies->Plot, 'moviePrice' => 0, 'speeltijd' => $movies->Runtime, 'genre' => $movies->Genre, 'poster' => $movies->Poster, 'released' => $movies->Released, 'director' => $movies->Director, 'writer' =>$movies->Writer, 'actors' => $movies->Actors, 'boxOffice' => $movies->BoxOffice]
 	        );
 	    }
 	    catch(\Exception $e){
@@ -139,18 +139,28 @@ class MovieController extends Controller
         return view('addMovie', ['noMovieError' => $noMovieError]);
     }
 
-    public function show($id)
+    public function show($id) //PLANNING ID
     {
     	$loggedIn = Auth::check();
         //$results = Movie::where('movieId', $id)->get();
-        $movieInfo = DB::table('movies')->where('movieId', $id)->first();
+
+        $themovieid = DB::table('plannings')->where('planningId', $id)->pluck('movieId');
+        $movieInfo = DB::table('movies')->where('movieId', $themovieid)->first();
+		
         $title = $movieInfo->movieTitle;
         $desc = $movieInfo->movieDescription;
         $runtime = $movieInfo->speeltijd;
         $genre = $movieInfo->genre; 
+        $poster = $movieInfo->poster;
+        $released = $movieInfo->released;
+        $director = $movieInfo->director;
+        $writer = $movieInfo->writer;
+        $actor = $movieInfo->actors;
+        $budget = $movieInfo->boxOffice;
+
         
         //dd($genre);
-        return view('movie', compact('loggedIn', 'title', 'desc', 'runtime', 'genre', 'id'));
+        return view('movie', compact('loggedIn', 'title', 'desc', 'runtime', 'genre', 'id', 'poster', 'released', 'director', 'writer', 'actor', 'budget'));
     }
 
     function edit($id)
