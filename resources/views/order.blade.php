@@ -112,6 +112,8 @@
                     <a class="btn btn-danger" onclick="Clear()">Wissen</a>
                     <a class="btn btn-primary" onclick="Order()">Bestellen</a>
                     <span id="paylocation">{{route('pay')}}</span>
+                    <span id="mvid">{{ $themovieid[0] }}</span>
+                    <span id="plid">{{ $planningId }}</span>
                 </div>
 
             </div>

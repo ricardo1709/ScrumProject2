@@ -139,11 +139,14 @@ class MovieController extends Controller
         return view('addMovie', ['noMovieError' => $noMovieError]);
     }
 
-    public function show($id)
+    public function show($id) //PLANNING ID
     {
     	$loggedIn = Auth::check();
         //$results = Movie::where('movieId', $id)->get();
-        $movieInfo = DB::table('movies')->where('movieId', $id)->first();
+
+        $themovieid = DB::table('plannings')->where('planningId', $id)->pluck('movieId');
+        $movieInfo = DB::table('movies')->where('movieId', $themovieid)->first();
+		
         $title = $movieInfo->movieTitle;
         $desc = $movieInfo->movieDescription;
         $runtime = $movieInfo->speeltijd;
@@ -154,6 +157,7 @@ class MovieController extends Controller
         $writer = $movieInfo->writer;
         $actor = $movieInfo->actors;
         $budget = $movieInfo->boxOffice;
+
         
         //dd($genre);
         return view('movie', compact('loggedIn', 'title', 'desc', 'runtime', 'genre', 'id', 'poster', 'released', 'director', 'writer', 'actor', 'budget'));

@@ -9,9 +9,11 @@ use Illuminate\Support\Facades\DB;
 
 class SeatController extends Controller
 {
-    public function show($id) 
+    public function show($id) //PLANNING ID!
     {
-        $theroomid = DB::table('plannings')->where('movieId', $id)->pluck('roomId');
+        $themovieid = DB::table('plannings')->where('planningId', $id)->pluck('movieId');
+
+        $theroomid = DB::table('plannings')->where('movieId', $themovieid)->pluck('roomId');
 
         if ($theroomid != null) {
             $rooms = DB::table('rooms')->where('roomId', $theroomid)->get();
@@ -31,7 +33,7 @@ class SeatController extends Controller
                 $loveSeatArray[($rm->roomId)] = DB::table('seats')->where('roomId', ($rm->roomId))->where('isLoveseat', 1)->get()->toArray();
             }
 
-            return view('order', ['rooms' => $rooms, 'seatStrings' => $seatStrings, 'loveSeatStrings' => $loveSeatStrings, 'seatArray' => $seatArray, 'loveSeatArray' => $loveSeatArray]);
+            return view('order', ['rooms' => $rooms, 'seatStrings' => $seatStrings, 'loveSeatStrings' => $loveSeatStrings, 'seatArray' => $seatArray, 'loveSeatArray' => $loveSeatArray, 'planningId' => $id, 'themovieid' => $themovieid]);
 
             //return $seatArray;
         }
